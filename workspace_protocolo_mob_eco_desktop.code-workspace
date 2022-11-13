@@ -1,0 +1,29 @@
+{ 
+	"folders": [ 
+		{ 
+			"path": "." 
+		}, 
+		{ 
+			"path": "modulos\\dependencies_module" 
+		}, 
+		{ 
+			"path": "modulos\\design_system_module" 
+		}, 
+		{ 
+			"path": "app_cliente_protocolo_mob_eco_desktop" 
+		}, 
+		{ 
+			"path": "modulos\\core_module" 
+		}, 
+		{ 
+			"path": "modulos\\splash_module" 
+		}, 
+		{ 
+			"path": "modulos\\login_module" 
+		}, 
+		{ 
+			"path": "modulos\\home_module" 
+		}, 
+	], 
+	"settings": {} 
+} 
