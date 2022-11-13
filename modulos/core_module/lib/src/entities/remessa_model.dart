@@ -1,70 +1,63 @@
 import 'dart:convert';
 import 'package:dependencies_module/dependencies_module.dart';
 
+@Entity()
 class RemessaModel {
-  final String _id;
+  int id = 0;
   final String nomeArquivo;
+
+  @Property(type: PropertyType.date)
   final DateTime data;
+
+  @Property(type: PropertyType.date)
   final DateTime upload;
-  final List<dynamic> idsClientes;
-  final int quantidadeProtocolos;
-  final bool isOk;
-  List<dynamic>? arquivosInvalidos;
-  List<dynamic>? protocolosOk;
-  List<dynamic>? protocolosSemBoletos;
+
+  @Backlink()
+  final boletos = ToMany<BoletoModel>();
+  // List<BoletoModel> protocoloComBoleto = ToMany<BoletoModel>();
+  // List<BoletoModel> protocoloSemBoleto = ToMany<BoletoModel>();
+  // List<BoletoModel> arquivosInvalidos = ToMany<BoletoModel>();
+
   RemessaModel({
     required this.nomeArquivo,
     required this.data,
     required this.upload,
-    required this.idsClientes,
-    this.arquivosInvalidos,
-    this.protocolosOk,
-    this.protocolosSemBoletos,
-    String? id,
-  })  : quantidadeProtocolos = idsClientes.length,
-        _id = id ?? const Uuid().v1(),
-        isOk = protocolosOk != null
-            ? listEquals(idsClientes, protocolosOk)
-            : false;
+  });
 
-  String get id => _id;
+  // Map<String, dynamic> toMap() {
+  //   final Map<String, dynamic> map = {
+  //     'nomeArquivo': nomeArquivo,
+  //     'data': data,
+  //     'upload': upload,
+  //     'idsClientes': idsClientes,
+  //     'Arquivos invalidos': arquivosInvalidos,
+  //     'Protocolos ok': arquivosInvalidos,
+  //     'Protocolos sem boletos': protocolosSemBoletos,
+  //   };
+  //   return map;
+  // }
 
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> map = {
-      'id': id,
-      'nomeArquivo': nomeArquivo,
-      'data': data,
-      'upload': upload,
-      'idsClientes': idsClientes,
-      'Arquivos invalidos': arquivosInvalidos,
-      'Protocolos ok': arquivosInvalidos,
-      'Protocolos sem boletos': protocolosSemBoletos,
-    };
-    return map;
-  }
+  // factory RemessaModel.fromMap(Map<String, dynamic> map) {
+  //   final model = RemessaModel(
+  //     nomeArquivo: map['nomeArquivo'] ?? '',
+  //     data: map['data'],
+  //     upload: map['upload'],
+  //     idsClientes: map['idsClientes'],
+  //     arquivosInvalidos: map['Arquivos invalidos'],
+  //     protocolosOk: map['Protocolos ok'],
+  //     protocolosSemBoletos: map['Protocolos sem boletos'],
+  //   );
+  //   return model;
+  // }
 
-  factory RemessaModel.fromMap(Map<String, dynamic> map) {
-    final model = RemessaModel(
-      nomeArquivo: map['nomeArquivo'] ?? '',
-      data: map['data'],
-      upload: map['upload'],
-      idsClientes: map['idsClientes'],
-      id: map['id'],
-      arquivosInvalidos: map['Arquivos invalidos'],
-      protocolosOk: map['Protocolos ok'],
-      protocolosSemBoletos: map['Protocolos sem boletos'],
-    );
-    return model;
-  }
+  // String toJson() => json.encode(toMap());
 
-  String toJson() => json.encode(toMap());
-
-  factory RemessaModel.fromJson(String source) =>
-      RemessaModel.fromMap(json.decode(source));
+  // factory RemessaModel.fromJson(String source) =>
+  //     RemessaModel.fromMap(json.decode(source));
 
   @override
   String toString() =>
-      'RemessaModel(Id: $id, Nome do arquivo: $nomeArquivo, Upload: $upload, Data: ${dataFormatoDDMMYYYY.format(data)}, Ids Clientes: $idsClientes, Quantidade de protocolos: $quantidadeProtocolos)';
+      'RemessaModel(Id: $id, Nome do arquivo: $nomeArquivo, Upload: $upload, Data: ${dataFormatoDDMMYYYY.format(data)}, Quantidade de protocolos: ${boletos.length})';
 
   @override
   bool operator ==(Object other) {
@@ -73,10 +66,9 @@ class RemessaModel {
     return other is RemessaModel &&
         other.nomeArquivo == nomeArquivo &&
         other.data == data &&
-        listEquals(other.idsClientes, idsClientes);
+        listEquals(other.boletos, boletos);
   }
 
   @override
-  int get hashCode =>
-      nomeArquivo.hashCode ^ data.hashCode ^ idsClientes.hashCode;
+  int get hashCode => nomeArquivo.hashCode ^ data.hashCode ^ boletos.hashCode;
 }
