@@ -1,0 +1,21 @@
+name: upload_arquivo_html_package
+description: Package responsavel pelo upload de arquivos HTML.
+publish_to: 'none'
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+  flutter: ">=3.3.8"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dependencies_module:
+    path: ../../modulos/dependencies_module
+
+dev_dependencies:
+
+  flutter_lints: ^2.0.0
+
+flutter:
