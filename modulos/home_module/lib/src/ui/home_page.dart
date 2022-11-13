@@ -8,10 +8,21 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return designSystemController.scaffold(
-      body: BodyHomeWidget(),
-      page: 0,
-      context: context,
+    final box = dataBase.box<Note>();
+    final id = box.getAll();
+    print(box.getAll());
+    return Container(
+      color: Colors.white,
+      child: SizedBox(
+        height: 100,
+        width: 100,
+        child: Text("Teste - ${id[0].text}"),
+      ),
     );
+    // return designSystemController.scaffold(
+    //   body: BodyHomeWidget(),
+    //   page: 0,
+    //   context: context,
+    // );
   }
 }

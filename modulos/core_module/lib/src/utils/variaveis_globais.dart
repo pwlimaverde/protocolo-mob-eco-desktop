@@ -1,9 +1,10 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
 final CoreModuleController coreModuleController = Get.find();
-final UploadRemessaController uploadRemessaController = Get.find();
-final DesignSystemController designSystemController = Get.find();
-final RemessasController remessasController = Get.find();
+final Store dataBase = Get.find();
+// final UploadRemessaController uploadRemessaController = Get.find();
+// final DesignSystemController designSystemController = Get.find();
+// final RemessasController remessasController = Get.find();
 
 const double menuWidth = 200;
 const double hederHeight = 60;

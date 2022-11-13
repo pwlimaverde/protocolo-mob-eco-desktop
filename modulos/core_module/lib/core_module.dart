@@ -1,5 +1,6 @@
 library core_module;
 
+import 'package:dependencies_module/dependencies_module.dart';
 import 'package:objectbox/objectbox.dart';
 
 export 'src/interfaces/module.dart';

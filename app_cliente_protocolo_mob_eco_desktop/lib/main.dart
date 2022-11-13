@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 
 void main() async {
   runApp(const AnimacaoInicial());
-  initServices();
-  // await Future.delayed(const Duration(milliseconds: 1000));
-  // runApp(const MyApp());
+  await initServices();
+  runApp(const MyApp());
 }
 
 class AnimacaoInicial extends StatelessWidget {
@@ -28,24 +27,24 @@ class AnimacaoInicial extends StatelessWidget {
   }
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetMaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Sistema Registro de Protocolos MOB - ECO',
-//       initialBinding: CoreModuleBindings(),
-//       getPages: [
-//         ...SplashModule().routers,
-//         ...UploadRemessaModule().routers,
-//         ...RemessasModule().routers,
-//         ...HomeModule().routers,
-//       ],
-//       theme: ThemeData(
-//         primarySwatch: Colors.red,
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Sistema Registro de Protocolos MOB - ECO',
+      initialBinding: CoreModuleBindings(),
+      getPages: [
+        // ...SplashModule().routers,
+        // ...UploadRemessaModule().routers,
+        // ...RemessasModule().routers,
+        ...HomeModule().routers,
+      ],
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+    );
+  }
+}
