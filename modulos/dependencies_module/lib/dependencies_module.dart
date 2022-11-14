@@ -20,11 +20,11 @@ export 'package:core_module/core_module.dart';
 // export 'package:splash_module/splash_module.dart';
 // export 'package:login_module/login_module.dart';
 export 'package:home_module/home_module.dart';
-// export 'package:upload_remessa_module/upload_remessa_module.dart';
-// export 'package:remessas_module/remessas_module.dart';
+export 'package:upload_remessa_module/upload_remessa_module.dart';
+export 'package:remessas_module/remessas_module.dart';
 
 ///Pacakages Internos
-// export 'package:upload_arquivo_html_package/upload_arquivo_html_package.dart';
+export 'package:upload_arquivo_html_package/upload_arquivo_html_package.dart';
 
 ///Packages Dart
 export 'package:flutter/foundation.dart';

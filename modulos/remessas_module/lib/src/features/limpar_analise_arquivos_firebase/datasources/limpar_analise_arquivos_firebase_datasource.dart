@@ -7,16 +7,16 @@ class LimparAnaliseArquivosFirebaseDatasource implements Datasource<bool> {
   Future<bool> call({required ParametersReturnResult parameters}) async {
     try {
       if (parameters is ParametrosLimparAnaliseArquivos) {
-        final mapDelete = {
-          "Protocolos ok": null,
-          "Protocolos sem boletos": null,
-          "Arquivos invalidos": null
-        };
+        // final mapDelete = {
+        //   "Protocolos ok": null,
+        //   "Protocolos sem boletos": null,
+        //   "Arquivos invalidos": null
+        // };
 
-        await FirebaseFirestore.instance
-            .collection("remessas")
-            .doc(parameters.idRemessa)
-            .update(mapDelete);
+        // await FirebaseFirestore.instance
+        //     .collection("remessas")
+        //     .doc(parameters.idRemessa)
+        //     .update(mapDelete);
 
         return true;
       } else {

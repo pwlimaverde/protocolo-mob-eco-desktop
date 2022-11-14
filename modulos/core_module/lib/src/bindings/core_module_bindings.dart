@@ -27,32 +27,32 @@ class CoreModuleBindings implements Bindings {
       DesignSystemController(),
       permanent: true,
     );
-    // Get.put<RemessasController>(
-    //   RemessasController(
-    //     carregarRemessasFirebaseUsecase: CarregarRemessasFirebaseUsecase(
-    //       datasource: CarregarRemessasFirebaseDatasource(),
-    //     ),
-    //     carregarBoletosFirebaseUsecase: CarregarBoletosFirebaseUsecase(
-    //       datasource: CarregarBoletosFirebaseDatasource(),
-    //     ),
-    //     mapeamentoNomesArquivoHtmlUsecase: MapeamentoNomesArquivoHtmlUsecase(
-    //       datasource: MapeamentoNomesArquivoHtmlDatasource(),
-    //     ),
-    //     uploadArquivoHtmlPresenter: UploadArquivoHtmlPresenter(),
-    //     uploadAnaliseArquivosFirebaseUsecase:
-    //         UploadAnaliseArquivosFirebaseUsecase(
-    //       datasource: UploadAnaliseArquivosFirebaseDatasource(),
-    //     ),
-    //     limparAnaliseArquivosFirebaseUsecase:
-    //         LimparAnaliseArquivosFirebaseUsecase(
-    //       datasource: LimparAnaliseArquivosFirebaseDatasource(),
-    //     ),
-    //     carregarImagemModeloFirebaseUsecase:
-    //         CarregarImagemModeloFirebaseUsecase(
-    //       datasource: CarregarImagemModeloFirebaseDatasource(),
-    //     ),
-    //   ),
-    //   permanent: true,
-    // );
+    Get.put<RemessasController>(
+      RemessasController(
+        carregarRemessasFirebaseUsecase: CarregarRemessasFirebaseUsecase(
+          datasource: CarregarRemessasFirebaseDatasource(),
+        ),
+        carregarBoletosFirebaseUsecase: CarregarBoletosFirebaseUsecase(
+          datasource: CarregarBoletosFirebaseDatasource(),
+        ),
+        mapeamentoNomesArquivoHtmlUsecase: MapeamentoNomesArquivoHtmlUsecase(
+          datasource: MapeamentoNomesArquivoHtmlDatasource(),
+        ),
+        uploadArquivoHtmlPresenter: UploadArquivoHtmlPresenter(),
+        uploadAnaliseArquivosFirebaseUsecase:
+            UploadAnaliseArquivosFirebaseUsecase(
+          datasource: UploadAnaliseArquivosFirebaseDatasource(),
+        ),
+        limparAnaliseArquivosFirebaseUsecase:
+            LimparAnaliseArquivosFirebaseUsecase(
+          datasource: LimparAnaliseArquivosFirebaseDatasource(),
+        ),
+        carregarImagemModeloFirebaseUsecase:
+            CarregarImagemModeloFirebaseUsecase(
+          datasource: CarregarImagemModeloFirebaseDatasource(),
+        ),
+      ),
+      permanent: true,
+    );
   }
 }

@@ -9,14 +9,14 @@ class UploadBoletoFirebaseDatasource implements Datasource<bool> {
       if (parameters is ParametrosUploadBoleto) {
         // final model = parameters.remessaUpload;
         // print(model);
-        final mapBoleto = parameters.boletoUpload.toMap();
+        // final mapBoleto = parameters.boletoUpload.toMap();
 
-        await FirebaseFirestore.instance
-            .collection("remessas")
-            .doc(parameters.boletoUpload.idRemessa)
-            .collection("boletos")
-            .doc(parameters.boletoUpload.idCliente.toString())
-            .set(mapBoleto);
+        // await FirebaseFirestore.instance
+        //     .collection("remessas")
+        //     .doc(parameters.boletoUpload.idRemessa)
+        //     .collection("boletos")
+        //     .doc(parameters.boletoUpload.idCliente.toString())
+        //     .set(mapBoleto);
 
         return true;
       } else {

@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:dependencies_module/dependencies_module.dart';
 
 class ParametrosLeituraArquivoHtml implements ParametersReturnResult {
-  final List<html.File> listaArquivosHtml;
+  final List<File> listaArquivosHtml;
   @override
   final AppError error;
   @override

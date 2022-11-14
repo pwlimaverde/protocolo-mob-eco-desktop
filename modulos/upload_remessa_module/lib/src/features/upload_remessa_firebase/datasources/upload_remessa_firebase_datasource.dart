@@ -9,12 +9,12 @@ class UploadRemessaFirebaseDatasource implements Datasource<bool> {
       if (parameters is ParametrosUploadRemessa) {
         // final model = parameters.remessaUpload;
         // print(model);
-        final mapRemessa = parameters.remessaUpload.toMap();
+        // final mapRemessa = parameters.remessaUpload.toMap();
 
-        await FirebaseFirestore.instance
-            .collection("remessas")
-            .doc(parameters.remessaUpload.id)
-            .set(mapRemessa);
+        // await FirebaseFirestore.instance
+        //     .collection("remessas")
+        //     .doc(parameters.remessaUpload.id)
+        //     .set(mapRemessa);
 
         return true;
       } else {

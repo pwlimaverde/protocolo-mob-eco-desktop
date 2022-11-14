@@ -9,17 +9,17 @@ class CarregarBoletosFirebaseDatasource
       {required ParametersReturnResult parameters}) async {
     try {
       if (parameters is ParametrosCarregarBoletos) {
-        final getBoletos = FirebaseFirestore.instance
-            .collection("remessas")
-            .doc(parameters.remessaCarregada.id)
-            .collection("boletos")
-            .get();
+        // final getBoletos = FirebaseFirestore.instance
+        //     .collection("remessas")
+        //     .doc(parameters.remessaCarregada.id)
+        //     .collection("boletos")
+        //     .get();
 
-        final boletos = getBoletos.then((value) {
-          List<BoletoModel> list =
-              value.docs.map((e) => BoletoModel.fromMap(e.data())).toList();
-          return list;
-        });
+        // final boletos = getBoletos.then((value) {
+        //   List<BoletoModel> list =
+        //       value.docs.map((e) => BoletoModel.fromMap(e.data())).toList();
+        //   return list;
+        // });
 
         // teste3.listen((event) {
         //   print("******");
@@ -27,7 +27,7 @@ class CarregarBoletosFirebaseDatasource
         //   print("******");
         // });
 
-        return boletos;
+        return <BoletoModel>[];
       } else {
         throw Exception(
             "Erro ao carregar os dados dos boletos do banco de dados");

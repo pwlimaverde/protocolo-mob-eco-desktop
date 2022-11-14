@@ -50,8 +50,8 @@ class RemessasController extends GetxController
   @override
   void onReady() {
     super.onReady();
-    _carregarImagemModelo();
-    _carregarRemessas();
+    // _carregarImagemModelo();
+    // _carregarRemessas();
   }
 
   @override
@@ -132,16 +132,16 @@ class RemessasController extends GetxController
         int indexArquivoOk = 0;
         List<int> idsOk = [];
         List<int> idsError = [];
-        List<dynamic> idsCliente = remessa.idsClientes;
+        // List<dynamic> idsCliente = remessa.idsClientes;
         List<int> arquivosInvalidos = [];
 
-        final testeOK = remessa.protocolosOk;
+        // final testeOK = remessa.protocolosOk;
 
-        if (testeOK != null) {
-          for (dynamic element in testeOK) {
-            idsOk.add(element);
-          }
-        }
+        // if (testeOK != null) {
+        //   for (dynamic element in testeOK) {
+        //     idsOk.add(element);
+        //   }
+        // }
 
         for (Map<int, Uint8List> element in arquivosDaRemessa) {
           idsArquivosRemessa.add(element.keys.first);
@@ -180,13 +180,13 @@ class RemessasController extends GetxController
           }
         }
 
-        for (int arquivo in idsArquivosRemessa) {
-          final compare =
-              idsCliente.where((element) => element == arquivo).length == 1;
-          if (!compare) {
-            arquivosInvalidos.add(arquivo);
-          }
-        }
+        // for (int arquivo in idsArquivosRemessa) {
+        //   final compare =
+        //       idsCliente.where((element) => element == arquivo).length == 1;
+        //   if (!compare) {
+        //     arquivosInvalidos.add(arquivo);
+        //   }
+        // }
 
         idsOk.sort(
           (a, b) => a.compareTo(b),
@@ -250,13 +250,13 @@ class RemessasController extends GetxController
     return map;
   }
 
-  Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
-    html.AnchorElement(
-        href:
-            'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-      ..setAttribute('download', fileName)
-      ..click();
-  }
+  // Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
+  //   html.AnchorElement(
+  //       href:
+  //           'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+  //     ..setAttribute('download', fileName)
+  //     ..click();
+  // }
 
   _downloadFilesAsZIP(Map<String, dynamic> zips) {
     final files = zips["files"];
@@ -289,8 +289,8 @@ class RemessasController extends GetxController
       final bytes = encoder.encode(archive,
           level: Deflate.BEST_COMPRESSION, output: outputStream);
 
-      saveAndLaunchFile(bytes!,
-          "${i + 1} de $quantidadeDeZips - Remessa ordenada - $nomeRemessa.zip");
+      // saveAndLaunchFile(bytes!,
+      //     "${i + 1} de $quantidadeDeZips - Remessa ordenada - $nomeRemessa.zip");
 
       if (filesPart.length > tamanhoDownload) {
         filesPart.removeRange(0, tamanhoDownload);

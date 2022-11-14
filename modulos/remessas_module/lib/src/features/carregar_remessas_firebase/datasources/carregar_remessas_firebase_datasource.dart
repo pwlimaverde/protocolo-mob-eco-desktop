@@ -1,9 +1,9 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
 class CarregarRemessasFirebaseDatasource
-    implements Datasource<Stream<List<RemessaModel>>> {
+    implements Datasource<List<RemessaModel>> {
   @override
-  Future<Stream<List<RemessaModel>>> call(
+  Future<List<RemessaModel>> call(
       {required ParametersReturnResult parameters}) async {
     try {
       // final listaRemessas = <RemessaModel>[];
@@ -15,14 +15,14 @@ class CarregarRemessasFirebaseDatasource
       //   listaRemessas.add(RemessaModel.fromMap(map));
       // }
 
-      final snapshots =
-          FirebaseFirestore.instance.collection("remessas").snapshots();
+      // final snapshots =
+      //     FirebaseFirestore.instance.collection("remessas").snapshots();
 
-      final remessas = snapshots.map((event) {
-        List<RemessaModel> list =
-            event.docs.map((e) => RemessaModel.fromMap(e.data())).toList();
-        return list;
-      });
+      // final remessas = snapshots.map((event) {
+      //   List<RemessaModel> list =
+      //       event.docs.map((e) => RemessaModel.fromMap(e.data())).toList();
+      //   return list;
+      // });
 
       // teste3.listen((event) {
       //   print("******");
@@ -30,7 +30,7 @@ class CarregarRemessasFirebaseDatasource
       //   print("******");
       // });
 
-      return remessas;
+      return <RemessaModel>[];
     } catch (e) {
       throw Exception(
           "Erro ao carregar os dados das remessas no banco de dados");

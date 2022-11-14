@@ -83,13 +83,13 @@ _todasRemessasList() {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data.toDate())}",
+                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data)}",
                       ),
                       Text(
-                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload.toDate())}",
+                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload)}",
                       ),
                       Text(
-                        "Quantidade de Protocolos: ${remessaModel.quantidadeProtocolos.toString()}",
+                        "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                       ),
                       remessaModel.arquivosInvalidos != null
                           ? remessaModel.arquivosInvalidos!.isNotEmpty
@@ -119,33 +119,33 @@ _todasRemessasList() {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        designSystemController.botaoPrintProtocolo(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoPrintProtocolo(
+                        //   filtro: remessaModel,
+                        // ),
                         const SizedBox(
                           width: 15,
                         ),
-                        designSystemController.botaoDownloadXlsx(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoDownloadXlsx(
+                        //   filtro: remessaModel,
+                        // ),
                         const SizedBox(
                           width: 15,
                         ),
-                        designSystemController.botaoAnalisePdf(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoAnalisePdf(
+                        //   filtro: remessaModel,
+                        // ),
                         const SizedBox(
                           width: 15,
                         ),
-                        designSystemController.botaoDownloadRelatorio(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoDownloadRelatorio(
+                        //   filtro: remessaModel,
+                        // ),
                         const SizedBox(
                           width: 15,
                         ),
-                        designSystemController.botaoLimparAnalise(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoLimparAnalise(
+                        //   filtro: remessaModel,
+                        // ),
                       ],
                     ),
                   ),

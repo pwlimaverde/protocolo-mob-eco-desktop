@@ -9,12 +9,12 @@ class UploadAnaliseArquivosFirebaseDatasource implements Datasource<bool> {
       if (parameters is ParametrosUploadAnaliseArquivos) {
         // final model = parameters.remessaUpload;
         // print(model);
-        final mapBoleto = parameters.mapAliseArquivos;
+        // final mapBoleto = parameters.mapAliseArquivos;
 
-        await FirebaseFirestore.instance
-            .collection("remessas")
-            .doc(parameters.remessa.id)
-            .update(mapBoleto);
+        // await FirebaseFirestore.instance
+        //     .collection("remessas")
+        //     .doc(parameters.remessa.id)
+        //     .update(mapBoleto);
 
         return true;
       } else {

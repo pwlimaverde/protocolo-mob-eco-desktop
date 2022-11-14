@@ -25,16 +25,14 @@ class ProcessamentoDadosArquivoHtmlDatasource
           if (listaBoletos.isNotEmpty) {
             final remessa = RemessaModel(
               nomeArquivo: nomeArquivo,
-              data: Timestamp.fromDate(data),
-              upload: Timestamp.fromDate(DateTime.now()),
-              idsClientes: _idsClientes(filtro: listaIdsClientes),
+              data: data,
+              upload: DateTime.now(),
             );
 
             final boletos = await _processamentoBoleto(
               tipoArquivo: tipo,
               listaBoletos: listaBoletos,
               listaIdsClientes: listaIdsClientes,
-              idRemessa: remessa.id,
             );
             remessasProcessadas.add({
               "remessa": remessa,
@@ -43,9 +41,8 @@ class ProcessamentoDadosArquivoHtmlDatasource
           } else {
             final remessa = RemessaModel(
               nomeArquivo: nomeArquivo,
-              data: Timestamp.fromDate(data),
-              upload: Timestamp.fromDate(DateTime.now()),
-              idsClientes: <int>[],
+              data: data,
+              upload: DateTime.now(),
             );
             remessasProcessadasError
                 .add({"remessa": remessa, "boletos": <BoletoModel>[]});
@@ -82,7 +79,6 @@ List<int> _idsClientes({required List<int> filtro}) {
 Future<List<BoletoModel>> _processamentoBoleto({
   required List<Map<String, String>> listaBoletos,
   required String tipoArquivo,
-  required String idRemessa,
   required List<int> listaIdsClientes,
 }) async {
   List<BoletoModel> boletos = [];
@@ -90,30 +86,30 @@ Future<List<BoletoModel>> _processamentoBoleto({
   if (listaBoletos.isNotEmpty) {
     for (Map<String, String> boleto in listaBoletos) {
       if (tipoArquivo == "csv") {
-        BoletoModel model = BoletoModel.fromMapCsv(
-          idRemessa: idRemessa,
-          map: boleto,
-        );
-        final quantBoletos = listaIdsClientes
-            .where((element) => element == model.idCliente)
-            .length;
-        for (int id = 1; id < quantBoletos; id++) {
-          model.setQuantidadeBoletos();
-        }
-        boletos.add(model);
+        // BoletoModel model = BoletoModel.fromMapCsv(
+        //   idRemessa: idRemessa,
+        //   map: boleto,
+        // );
+        // final quantBoletos = listaIdsClientes
+        //     .where((element) => element == model.idCliente)
+        //     .length;
+        // for (int id = 1; id < quantBoletos; id++) {
+        //   model.setQuantidadeBoletos();
+        // }
+        // boletos.add(model);
       }
       if (tipoArquivo == "xlsx") {
-        BoletoModel model = BoletoModel.fromMapXlsx(
-          idRemessa: idRemessa,
-          map: boleto,
-        );
-        final quantBoletos = listaIdsClientes
-            .where((element) => element == model.idCliente)
-            .length;
-        for (int id = 1; id < quantBoletos; id++) {
-          model.setQuantidadeBoletos();
-        }
-        boletos.add(model);
+        // BoletoModel model = BoletoModel.fromMapXlsx(
+        //   idRemessa: idRemessa,
+        //   map: boleto,
+        // );
+        // final quantBoletos = listaIdsClientes
+        //     .where((element) => element == model.idCliente)
+        //     .length;
+        // for (int id = 1; id < quantBoletos; id++) {
+        //   model.setQuantidadeBoletos();
+        // }
+        // boletos.add(model);
       }
     }
     return boletos;

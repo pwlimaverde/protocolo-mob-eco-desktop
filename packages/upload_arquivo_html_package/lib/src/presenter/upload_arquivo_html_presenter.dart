@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dependencies_module/dependencies_module.dart';
 import '../features/arquivos_file_picker/carregar_file_picker/datasources/upload_arquivo_file_picker_datasource.dart';
 import '../features/arquivos_file_picker/carregar_file_picker/domain/usecase/carregar_arquivo_file_picker_usecase.dart';
@@ -39,7 +41,7 @@ class UploadArquivoHtmlPresenter
     return leitura;
   }
 
-  Future<List<html.File>> _carregarArquivo({
+  Future<List<File>> _carregarArquivo({
     required ParametersReturnResult parameters,
   }) async {
     final stringList = await CarregarArquivoHtmlUsecase(
@@ -56,7 +58,7 @@ class UploadArquivoHtmlPresenter
   }
 
   Future<ReturnSuccessOrError<List<Map<String, Uint8List>>>> _leituraArquivo({
-    required List<html.File> listaArquivosHtml,
+    required List<File> listaArquivosHtml,
     required ParametersReturnResult parameters,
   }) async {
     final leitura = await LeituraArquivoHtmlUsecase(

@@ -49,7 +49,7 @@ class UploadRemessaController extends GetxController
   @override
   void onReady() {
     super.onReady();
-    setUploadRemessas();
+    // setUploadRemessas();
   }
 
   @override

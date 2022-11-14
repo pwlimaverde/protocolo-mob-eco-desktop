@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dependencies_module/dependencies_module.dart';
 import 'dart:convert' as convert;
 
@@ -9,11 +11,11 @@ class LeituraArquivoHtmlDatasource
   Future<List<Map<String, Uint8List>>> call(
       {required ParametersReturnResult parameters}) async {
     if (parameters is ParametrosLeituraArquivoHtml) {
-      List<html.File>? files = parameters.listaArquivosHtml;
+      List<File>? files = parameters.listaArquivosHtml;
 
       if (files.isNotEmpty) {
         List<Map<String, Uint8List>> listaMapBytes = [];
-        for (html.File file in files) {
+        for (File file in files) {
           listaMapBytes.add(await _mapBytes(file: file));
         }
         return listaMapBytes;
@@ -27,22 +29,23 @@ class LeituraArquivoHtmlDatasource
     }
   }
 
-  Future<Map<String, Uint8List>> _mapBytes({required html.File file}) {
-    final reader = html.FileReader();
+  Future<Map<String, Uint8List>> _mapBytes({required File file}) {
+    // final reader = html.FileReader();
 
-    final resultReader = reader.onLoadEnd.first.then((_) {
-      Object? result = reader.result;
-      String resultString = result.toString();
-      String base64 = resultString.substring(resultString.indexOf(",") + 1);
-      final Uint8List bytes = convert.base64.decode(base64);
+    // final resultReader = reader.onLoadEnd.first.then((_) {
+    //   Object? result = reader.result;
+    //   String resultString = result.toString();
+    //   String base64 = resultString.substring(resultString.indexOf(",") + 1);
+    //   final Uint8List bytes = convert.base64.decode(base64);
 
-      final Map<String, Uint8List> mapBytes = {file.name: bytes};
+    // final Map<String, Uint8List> mapBytes = {file.name: bytes};
+    final Map<String, Uint8List> mapBytes = {};
 
-      return mapBytes;
-    });
+    //   return mapBytes;
+    // });
 
-    reader.readAsDataUrl(file);
+    // reader.readAsDataUrl(file);
 
-    return resultReader;
+    return Future.value(mapBytes);
   }
 }

@@ -91,13 +91,13 @@ _uploadRemessaList() {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data.toDate())}",
+                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data)}",
                       ),
                       Text(
-                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload.toDate())}",
+                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload)}",
                       ),
                       Text(
-                        "Quantidade de Protocolos: ${remessaModel.quantidadeProtocolos.toString()}",
+                        "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                       ),
                       remessaModel.arquivosInvalidos != null
                           ? Text(
@@ -114,15 +114,15 @@ _uploadRemessaList() {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        designSystemController.botaoPrintProtocolo(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoPrintProtocolo(
+                        //   filtro: remessaModel,
+                        // ),
                         const SizedBox(
                           width: 15,
                         ),
-                        designSystemController.botaoDownloadXlsx(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoDownloadXlsx(
+                        //   filtro: remessaModel,
+                        // ),
                       ],
                     ),
                   ),
@@ -160,13 +160,13 @@ _duplicadasRemessaList() {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data.toDate())}",
+                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data)}",
                       ),
                       Text(
-                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload.toDate())}",
+                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload)}",
                       ),
                       Text(
-                        "Quantidade de Protocolos: ${remessaModel.quantidadeProtocolos.toString()}",
+                        "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                       ),
                       remessaModel.arquivosInvalidos != null
                           ? Text(
@@ -183,15 +183,15 @@ _duplicadasRemessaList() {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        designSystemController.botaoPrintProtocolo(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoPrintProtocolo(
+                        //   filtro: remessaModel,
+                        // ),
                         const SizedBox(
                           width: 15,
                         ),
-                        designSystemController.botaoDownloadXlsx(
-                          filtro: remessaModel,
-                        ),
+                        // designSystemController.botaoDownloadXlsx(
+                        //   filtro: remessaModel,
+                        // ),
                       ],
                     ),
                   ),
@@ -229,13 +229,13 @@ _uploadRemessaListError() {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data.toDate())}",
+                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data)}",
                       ),
                       Text(
-                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload.toDate())}",
+                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload)}",
                       ),
                       Text(
-                        "Quantidade de Protocolos: ${remessaModel.quantidadeProtocolos.toString()}",
+                        "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                       ),
                     ],
                   ),

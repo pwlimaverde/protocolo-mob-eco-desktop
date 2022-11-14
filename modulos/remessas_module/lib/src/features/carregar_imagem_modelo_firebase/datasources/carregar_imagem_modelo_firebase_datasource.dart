@@ -4,10 +4,11 @@ class CarregarImagemModeloFirebaseDatasource implements Datasource<Uint8List> {
   @override
   Future<Uint8List> call({required ParametersReturnResult parameters}) async {
     try {
-      final gsReference =
-          FirebaseStorage.instance.refFromURL(imagemModeloProtocolo);
+      // final gsReference =
+      //     FirebaseStorage.instance.refFromURL(imagemModeloProtocolo);
 
-      final modelo = await gsReference.getData();
+      // final modelo = await gsReference.getData();
+      final modelo = null;
 
       if (modelo != null) {
         return modelo;
