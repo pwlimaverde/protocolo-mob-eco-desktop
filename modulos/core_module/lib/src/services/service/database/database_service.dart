@@ -3,8 +3,7 @@ import 'db/objectbox.g.dart';
 
 class DatabaseService extends GetxService {
   Future<Store> init() async {
-    print("Inicio Database");
-    final store = await openStore();
+    final Store store = await openStore();
     return store;
   }
 }

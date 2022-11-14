@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'package:dependencies_module/dependencies_module.dart';
 
 @Entity()
 class RemessaModel {
   int id = 0;
   final String nomeArquivo;
+  List<int>? arquivosInvalidos;
 
   @Property(type: PropertyType.date)
   final DateTime data;
@@ -14,12 +14,10 @@ class RemessaModel {
 
   @Backlink()
   final boletos = ToMany<BoletoModel>();
-  // List<BoletoModel> protocoloComBoleto = ToMany<BoletoModel>();
-  // List<BoletoModel> protocoloSemBoleto = ToMany<BoletoModel>();
-  // List<BoletoModel> arquivosInvalidos = ToMany<BoletoModel>();
 
   RemessaModel({
     required this.nomeArquivo,
+    this.arquivosInvalidos,
     required this.data,
     required this.upload,
   });

@@ -8,9 +8,6 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final boxRemessa = dataBase.box<RemessaModel>();
-    final boxBoleto = dataBase.box<BoletoModel>();
-
     final boletoTeste = BoletoModel(
       idCliente: 1234,
       cliente: "Teste Cliente 1",
@@ -52,10 +49,14 @@ class HomePage extends GetView<HomeController> {
       boletoTeste6,
     ];
 
-    final id = boxRemessa.get(5) as RemessaModel;
+    final id = dataBaseRemessa.get(5) as RemessaModel;
     // boxBoleto.removeAll();
     // id.boletos.addAll(boletos);
-    // final teste2 = boxRemessa.put(id);
+    final teste = id.boletos as List<BoletoModel>;
+
+    // final Box<BoletoModel> teste1 = dataBaseBoleto.put();
+    // final teste2 = boxBoleto.put(teste[0]);
+    // final teste3 = boxRemessa.put(id);
     // final b1 = boxBoleto.get(3) as BoletoModel;
 
     // final teste2 = b1.remessa.target;
@@ -70,11 +71,9 @@ class HomePage extends GetView<HomeController> {
     // id.boletos.add(boletoTeste2);
     // id.boletos.add(boletoTeste3);
 
-    // final teste = boxBoleto.getAll() as List<BoletoModel>;
-
+    print(teste[0].id);
+    print(teste[0].isVerificado);
     print(id);
-    // print(id.boletos);
-    print(id.boletos);
     return Container(
       color: Colors.white,
       child: SizedBox(

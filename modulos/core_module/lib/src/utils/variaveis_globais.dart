@@ -2,6 +2,8 @@ import 'package:dependencies_module/dependencies_module.dart';
 
 final CoreModuleController coreModuleController = Get.find();
 final Store dataBase = Get.find();
+final Box<RemessaModel> dataBaseRemessa = Get.find();
+final Box<BoletoModel> dataBaseBoleto = Get.find();
 // final UploadRemessaController uploadRemessaController = Get.find();
 // final DesignSystemController designSystemController = Get.find();
 // final RemessasController remessasController = Get.find();

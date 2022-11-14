@@ -1,9 +1,9 @@
-import 'dart:convert';
 import 'package:dependencies_module/dependencies_module.dart';
 
 @Entity()
 class BoletoModel {
   int id = 0;
+  bool isVerificado = false;
 
   final remessa = ToOne<RemessaModel>();
 

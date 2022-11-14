@@ -29,7 +29,7 @@
     },
     {
       "id": "4:4205544150255207722",
-      "lastPropertyId": "28:3469139419422208954",
+      "lastPropertyId": "29:1084178194731555173",
       "name": "BoletoModel",
       "properties": [
         {
@@ -170,6 +170,11 @@
           "flags": 520,
           "indexId": "1:4531351396024036592",
           "relationTarget": "RemessaModel"
+        },
+        {
+          "id": "29:1084178194731555173",
+          "name": "isVerificado",
+          "type": 1
         }
       ],
       "relations": []

@@ -15,6 +15,14 @@ class CoreModuleBindings implements Bindings {
       ),
       permanent: true,
     );
+    Get.put<Box<RemessaModel>>(
+      dataBase.box<RemessaModel>(),
+      permanent: true,
+    );
+    Get.put<Box<BoletoModel>>(
+      dataBase.box<BoletoModel>(),
+      permanent: true,
+    );
     // Get.put<DesignSystemController>(
     //   DesignSystemController(),
     //   permanent: true,
