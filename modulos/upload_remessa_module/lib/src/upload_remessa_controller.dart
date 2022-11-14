@@ -106,6 +106,8 @@ class UploadRemessaController extends GetxController
         nameFeature: "Carregamento de Arquivo",
       ),
     );
+    print(arquivos.status);
+    print(arquivos.result);
     if (arquivos.status == StatusResult.success) {
       return arquivos.result;
     } else {

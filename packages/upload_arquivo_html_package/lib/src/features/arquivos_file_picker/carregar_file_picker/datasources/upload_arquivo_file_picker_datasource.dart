@@ -1,5 +1,5 @@
+import 'dart:io';
 import 'package:dependencies_module/dependencies_module.dart';
-import 'package:file_picker/file_picker.dart';
 
 class UploadArquivoFilePickerDatasource
     implements Datasource<List<Map<String, Uint8List>>> {
@@ -9,9 +9,21 @@ class UploadArquivoFilePickerDatasource
     try {
       FilePickerResult? result =
           await FilePicker.platform.pickFiles(allowMultiple: true);
+
       if (result != null) {
-        final fileBytes = result.files.map((file) {
-          return {file.name: file.bytes!};
+        List<File> files = result.paths.map((path) => File(path!)).toList();
+        final fileBytes = files.map((file) {
+          final String nomeCompleto = basename(file.path);
+          final String nome = nomeCompleto.contains(".csv")
+              ? nomeCompleto.split(".csv")[0]
+              : nomeCompleto.contains(".xlsx")
+                  ? nomeCompleto.split(".xlsx")[0]
+                  : nomeCompleto.contains(".pdf")
+                      ? nomeCompleto.split(".pdf")[0]
+                      : "Arquivo Invalido";
+          final Uint8List bytes = file.readAsBytesSync();
+
+          return {nome: bytes};
         }).toList();
         return fileBytes;
       } else {

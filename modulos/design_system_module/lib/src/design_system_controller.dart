@@ -77,7 +77,7 @@ class DesignSystemController extends GetxController
                 ]
               : coreModuleController.pageAtual.value == 1
                   ? <Widget>[
-                      // _iconButtonUpload(),
+                      _iconButtonUpload(),
                     ]
                   : [],
         ),
@@ -216,16 +216,16 @@ class DesignSystemController extends GetxController
   //   }
   // }
 
-  // Widget _iconButtonUpload() {
-  //   return BotaoUpload(
-  //     size: 20,
-  //     onPressed: _setUpload,
-  //   );
-  // }
+  Widget _iconButtonUpload() {
+    return BotaoUpload(
+      size: 20,
+      onPressed: _setUpload,
+    );
+  }
 
-  // void _setUpload() {
-  //   uploadRemessaController.setUploadRemessas();
-  // }
+  void _setUpload() {
+    uploadRemessaController.setUploadRemessas();
+  }
 
   // void _downloadAnalise({required RemessaModel filtro}) async {
   //   if (!filtro.isOk && filtro.protocolosSemBoletos != null) {
