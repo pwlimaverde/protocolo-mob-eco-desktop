@@ -8,16 +8,11 @@ class UploadRemessaDatabaseDatasource implements Datasource<RemessaModel> {
       {required ParametersReturnResult parameters}) async {
     try {
       if (parameters is ParametrosUploadRemessa) {
-        dataBaseRemessa.removeAll();
-        dataBaseBoleto.removeAll();
         final map = parameters.remessaUpload;
-
         final RemessaModel remessa = map["remessa"];
-
         final List<BoletoModel> boletos = map["boletos"];
 
         final remessaId = dataBaseRemessa.put(remessa);
-
         final remessaModel = dataBaseRemessa.get(remessaId);
 
         if (remessaModel != null) {
