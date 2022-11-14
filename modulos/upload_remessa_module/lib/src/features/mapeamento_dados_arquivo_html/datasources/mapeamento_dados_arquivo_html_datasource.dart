@@ -57,7 +57,7 @@ class MapeamentoDadosArquivoHtmlDatasource
       List<Map<String, String>> mapBoletos = [];
       List<int> idsClienteList = [];
 
-      mapXlsx.addAll({"nome do arquivo": map.keys.first.split(".")[0]});
+      mapXlsx.addAll({"nome do arquivo": map.keys.first.split(".xlsx")[0]});
       final dataProcessada = DateTime.parse(sheetObject.rows[0][24]?.value);
       mapXlsx.addAll({"data da remessa": dataProcessada});
 
@@ -122,7 +122,7 @@ class MapeamentoDadosArquivoHtmlDatasource
       listCsv.addAll(
           const CsvToListConverter(fieldDelimiter: ";").convert(decoderByte));
 
-      mapCsv.addAll({"nome do arquivo": map.keys.first.split(".")[0]});
+      mapCsv.addAll({"nome do arquivo": map.keys.first.split(".csv")[0]});
       final DateTime dataProcessada = DateTime.parse(
         "${listCsv[0].last.substring(6, 10)}-${listCsv[0].last.substring(3, 5)}-${listCsv[0].last.substring(0, 2)}",
       );

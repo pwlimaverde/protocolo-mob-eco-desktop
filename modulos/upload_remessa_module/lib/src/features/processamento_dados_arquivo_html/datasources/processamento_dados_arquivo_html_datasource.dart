@@ -13,7 +13,6 @@ class ProcessamentoDadosArquivoHtmlDatasource
         List<Map<String, dynamic>> remessasProcessadasError = [];
         for (Map<String, dynamic> mapRemessa in parameters.listaMapBruta) {
           final String nomeArquivo = mapRemessa["arquivo"]["nome do arquivo"];
-          print(nomeArquivo);
           final List<Map<String, String>> listaBoletos =
               mapRemessa["arquivo"]["boletos"];
 
@@ -64,18 +63,18 @@ class ProcessamentoDadosArquivoHtmlDatasource
   }
 }
 
-List<int> _idsClientes({required List<int> filtro}) {
-  final listIdsBoletos = <int>[];
-  for (int id in filtro) {
-    if (!listIdsBoletos.contains(id)) {
-      listIdsBoletos.add(id);
-    }
-  }
-  listIdsBoletos.sort(
-    (a, b) => a.compareTo(b),
-  );
-  return listIdsBoletos;
-}
+// List<int> _idsClientes({required List<int> filtro}) {
+//   final listIdsBoletos = <int>[];
+//   for (int id in filtro) {
+//     if (!listIdsBoletos.contains(id)) {
+//       listIdsBoletos.add(id);
+//     }
+//   }
+//   listIdsBoletos.sort(
+//     (a, b) => a.compareTo(b),
+//   );
+//   return listIdsBoletos;
+// }
 
 Future<List<BoletoModel>> _processamentoBoleto({
   required List<Map<String, String>> listaBoletos,
@@ -87,32 +86,33 @@ Future<List<BoletoModel>> _processamentoBoleto({
   if (listaBoletos.isNotEmpty) {
     for (Map<String, String> boleto in listaBoletos) {
       if (tipoArquivo == "csv") {
-        // BoletoModel model = BoletoModel.fromMapCsv(
-        //   idRemessa: idRemessa,
-        //   map: boleto,
-        // );
-        // final quantBoletos = listaIdsClientes
-        //     .where((element) => element == model.idCliente)
-        //     .length;
-        // for (int id = 1; id < quantBoletos; id++) {
-        //   model.setQuantidadeBoletos();
-        // }
-        // boletos.add(model);
+        BoletoModel model = BoletoModel.fromMapCsv(
+          map: boleto,
+        );
+        final quantBoletos = listaIdsClientes
+            .where((element) => element == model.idCliente)
+            .length;
+        for (int id = 1; id < quantBoletos; id++) {
+          model.setQuantidadeBoletos();
+        }
+        boletos.add(model);
       }
       if (tipoArquivo == "xlsx") {
-        // BoletoModel model = BoletoModel.fromMapXlsx(
-        //   idRemessa: idRemessa,
-        //   map: boleto,
-        // );
-        // final quantBoletos = listaIdsClientes
-        //     .where((element) => element == model.idCliente)
-        //     .length;
-        // for (int id = 1; id < quantBoletos; id++) {
-        //   model.setQuantidadeBoletos();
-        // }
-        // boletos.add(model);
+        BoletoModel model = BoletoModel.fromMapXlsx(
+          map: boleto,
+        );
+        final quantBoletos = listaIdsClientes
+            .where((element) => element == model.idCliente)
+            .length;
+        for (int id = 1; id < quantBoletos; id++) {
+          model.setQuantidadeBoletos();
+        }
+        boletos.add(model);
       }
     }
+    boletos.sort(
+      (a, b) => a.cliente.compareTo(b.cliente),
+    );
     return boletos;
   } else {
     throw Exception("Erro ao processar arquivo");

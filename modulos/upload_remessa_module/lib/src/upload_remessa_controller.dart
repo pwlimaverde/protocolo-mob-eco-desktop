@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'features/mapeamento_dados_arquivo_html/domain/usecase/mapeamento_dados_arquivo_html_usecase.dart';
 import 'features/processamento_dados_arquivo_html/domain/usecase/processamento_dados_arquivo_html_usecase.dart';
 import 'features/upload_boleto_firebase/domain/usecase/upload_boleto_firebase_usecase.dart';
-import 'features/upload_remessa_firebase/domain/usecase/upload_remessa_firebase_usecase.dart';
+import 'features/upload_remessa_database/domain/usecase/upload_remessa_database_usecase.dart';
 import 'utils/errors/erros_upload_remessa.dart';
 import 'utils/parametros/parametros_upload_remessa_module.dart';
 
@@ -14,13 +14,13 @@ class UploadRemessaController extends GetxController
   final MapeamentoDadosArquivoHtmlUsecase mapeamentoDadosArquivoHtmlUsecase;
   final ProcessamentoDadosArquivoHtmlUsecase
       processamentoDadosArquivoHtmlUsecase;
-  final UploadRemessaFirebaseUsecase uploadRemessaFirebaseUsecase;
+  final UploadRemessaDatabaseUsecase uploadRemessaDatabaseUsecase;
   final UploadBoletoFirebaseUsecase uploadBoletoFirebaseUsecase;
   UploadRemessaController({
     required this.uploadArquivoHtmlPresenter,
     required this.mapeamentoDadosArquivoHtmlUsecase,
     required this.processamentoDadosArquivoHtmlUsecase,
-    required this.uploadRemessaFirebaseUsecase,
+    required this.uploadRemessaDatabaseUsecase,
     required this.uploadBoletoFirebaseUsecase,
   });
 
@@ -106,8 +106,6 @@ class UploadRemessaController extends GetxController
         nameFeature: "Carregamento de Arquivo",
       ),
     );
-    print(arquivos.status);
-    print(arquivos.result);
     if (arquivos.status == StatusResult.success) {
       return arquivos.result;
     } else {
@@ -228,26 +226,14 @@ class UploadRemessaController extends GetxController
   }) async {
     try {
       if (novasRemessas.isNotEmpty) {
-        List<RemessaModel> listRemessa = [];
-        List<BoletoModel> listBoleto = [];
-        for (Map<String, dynamic> remessa in novasRemessas) {
-          listRemessa.add(remessa["remessa"]);
-          listBoleto.addAll(remessa["boletos"]);
-        }
+        final Iterable<Future<Map<String, dynamic>>> enviarRemessasFuturo =
+            novasRemessas.map(_enviarNovaRemessa);
 
-        final Iterable<Future<RemessaModel>> enviarRemessasFuturo =
-            listRemessa.map(_enviarNovaRemessa);
-        final Iterable<Future<BoletoModel>> enviarBoletosFuturo =
-            listBoleto.map(_enviarNovoBoleto);
-
-        final Future<Iterable<RemessaModel>> waitedRemessas =
+        final Future<Iterable<Map<String, dynamic>>> waitedRemessas =
             Future.wait(enviarRemessasFuturo);
 
-        final Future<Iterable<BoletoModel>> waitedBoletos =
-            Future.wait(enviarBoletosFuturo);
         await waitedRemessas;
-        await waitedBoletos;
-        _uploadRemessaList(listRemessa);
+
         designSystemController.message(
           MessageModel.info(
             title: "Upload de Remessa",
@@ -266,8 +252,9 @@ class UploadRemessaController extends GetxController
     }
   }
 
-  Future<RemessaModel> _enviarNovaRemessa(RemessaModel model) async {
-    final uploadFirebase = await uploadRemessaFirebaseUsecase(
+  Future<Map<String, dynamic>> _enviarNovaRemessa(
+      Map<String, dynamic> model) async {
+    final uploadFirebase = await uploadRemessaDatabaseUsecase(
       parameters: ParametrosUploadRemessa(
         remessaUpload: model,
         error: ErroUploadArquivo(
@@ -279,6 +266,7 @@ class UploadRemessaController extends GetxController
     );
 
     if (uploadFirebase.status == StatusResult.success) {
+      _uploadRemessaList.add(uploadFirebase.result);
       return model;
     } else {
       designSystemController.message(

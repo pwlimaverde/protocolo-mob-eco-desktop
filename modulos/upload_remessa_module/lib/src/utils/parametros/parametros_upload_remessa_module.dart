@@ -1,7 +1,7 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
 class ParametrosUploadRemessa implements ParametersReturnResult {
-  final RemessaModel remessaUpload;
+  final Map<String, dynamic> remessaUpload;
   @override
   final AppError error;
   @override

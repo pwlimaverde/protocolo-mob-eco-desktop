@@ -1,14 +1,14 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
-class UploadRemessaFirebaseUsecase extends UseCaseImplement<bool> {
-  final Datasource<bool> datasource;
+class UploadRemessaDatabaseUsecase extends UseCaseImplement<RemessaModel> {
+  final Datasource<RemessaModel> datasource;
 
-  UploadRemessaFirebaseUsecase({
+  UploadRemessaDatabaseUsecase({
     required this.datasource,
   });
 
   @override
-  Future<ReturnSuccessOrError<bool>> call({
+  Future<ReturnSuccessOrError<RemessaModel>> call({
     required ParametersReturnResult parameters,
   }) {
     final result = returnUseCase(
