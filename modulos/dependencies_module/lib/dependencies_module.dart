@@ -15,6 +15,7 @@ export 'package:percent_indicator/circular_percent_indicator.dart';
 export 'package:percent_indicator/percent_indicator.dart';
 export 'package:file_picker/file_picker.dart';
 export 'package:path/path.dart';
+export 'package:firedart/firedart.dart';
 
 ///Modulos
 export 'package:design_system_module/design_system_module.dart';

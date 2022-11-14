@@ -12,6 +12,7 @@ export 'src/core_module_controller.dart';
 export 'src/entities/boleto_model.dart';
 export 'src/entities/remessa_model.dart';
 export 'src/entities/messages_model.dart';
+export 'src/entities/imagem_modelo_model.dart';
 
 @Entity()
 class Note {

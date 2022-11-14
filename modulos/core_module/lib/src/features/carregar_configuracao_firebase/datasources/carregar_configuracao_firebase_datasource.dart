@@ -6,16 +6,17 @@ class CarregarConfiguracaoFirebaseDatasource
   Future<Map<String, dynamic>> call(
       {required ParametersReturnResult parameters}) async {
     try {
-      // final reference = await FirebaseFirestore.instance
-      //     .collection("configuracao")
-      //     .doc("protocolo")
-      //     .get();
-      // final configuracao = reference.data();
-      // if (configuracao != null) {
-      //   return configuracao;
-      // } else {
-      throw Exception("Erro ao carregar configurações do banco de dados");
-      // }
+      final configuracao = await dataBaseFireBase
+          .collection("configuracao")
+          .document("protocolo")
+          .get()
+          .then((value) => value.map);
+
+      if (configuracao.isNotEmpty) {
+        return configuracao;
+      } else {
+        throw Exception("Erro ao carregar configurações do banco de dados");
+      }
     } catch (e) {
       throw Exception("Erro ao carregar configurações do banco de dados");
     }

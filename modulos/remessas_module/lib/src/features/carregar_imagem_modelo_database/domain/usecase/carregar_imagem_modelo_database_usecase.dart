@@ -1,14 +1,15 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
-class CarregarImagemModeloFirebaseUsecase extends UseCaseImplement<Uint8List> {
-  final Datasource<Uint8List> datasource;
+class CarregarImagemModeloDatabaseUsecase
+    extends UseCaseImplement<ImagemModeloModel> {
+  final Datasource<ImagemModeloModel> datasource;
 
-  CarregarImagemModeloFirebaseUsecase({
+  CarregarImagemModeloDatabaseUsecase({
     required this.datasource,
   });
 
   @override
-  Future<ReturnSuccessOrError<Uint8List>> call({
+  Future<ReturnSuccessOrError<ImagemModeloModel>> call({
     required ParametersReturnResult parameters,
   }) {
     final result = returnUseCase(

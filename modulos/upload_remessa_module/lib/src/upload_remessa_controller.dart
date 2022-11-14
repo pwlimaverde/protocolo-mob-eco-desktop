@@ -199,6 +199,7 @@ class UploadRemessaController extends GetxController
       if (listRemessaError.isNotEmpty) {
         _uploadRemessaListError(listRemessaError);
       }
+
       if (listRemessasNovas.isNotEmpty) {
         return listRemessaProcessadasMap;
       } else {

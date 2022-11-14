@@ -1,3 +1,4 @@
+import 'package:core_module/src/entities/imagem_modelo_model.dart';
 import 'package:dependencies_module/dependencies_module.dart';
 
 import '../features/carregar_configuracao_firebase/datasources/carregar_configuracao_firebase_datasource.dart';
@@ -21,6 +22,10 @@ class CoreModuleBindings implements Bindings {
     );
     Get.put<Box<BoletoModel>>(
       dataBase.box<BoletoModel>(),
+      permanent: true,
+    );
+    Get.put<Box<ImagemModeloModel>>(
+      dataBase.box<ImagemModeloModel>(),
       permanent: true,
     );
     Get.put<DesignSystemController>(
@@ -47,9 +52,9 @@ class CoreModuleBindings implements Bindings {
             LimparAnaliseArquivosFirebaseUsecase(
           datasource: LimparAnaliseArquivosFirebaseDatasource(),
         ),
-        carregarImagemModeloFirebaseUsecase:
-            CarregarImagemModeloFirebaseUsecase(
-          datasource: CarregarImagemModeloFirebaseDatasource(),
+        carregarImagemModeloDatabaseUsecase:
+            CarregarImagemModeloDatabaseUsecase(
+          datasource: CarregarImagemModeloDatabaseDatasource(),
         ),
       ),
       permanent: true,

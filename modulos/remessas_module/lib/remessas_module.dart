@@ -12,5 +12,5 @@ export 'src/features/upload_analise_arquivos_firebase/datasources/upload_analise
 export 'src/features/upload_analise_arquivos_firebase/domain/usecase/upload_analise_arquivos_firebase_usecase.dart';
 export 'src/features/limpar_analise_arquivos_firebase/datasources/limpar_analise_arquivos_firebase_datasource.dart';
 export 'src/features/limpar_analise_arquivos_firebase/domain/usecase/limpar_analise_arquivos_firebase_usecase.dart';
-export 'src/features/carregar_imagem_modelo_firebase/datasources/carregar_imagem_modelo_firebase_datasource.dart';
-export 'src/features/carregar_imagem_modelo_firebase/domain/usecase/carregar_imagem_modelo_firebase_usecase.dart';
+export 'src/features/carregar_imagem_modelo_database/datasources/carregar_imagem_modelo_database_datasource.dart';
+export 'src/features/carregar_imagem_modelo_database/domain/usecase/carregar_imagem_modelo_database_usecase.dart';

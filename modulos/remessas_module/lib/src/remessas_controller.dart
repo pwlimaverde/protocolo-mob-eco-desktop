@@ -10,7 +10,7 @@ import 'utils/parametros/parametros_remessas_module.dart';
 
 class RemessasController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final CarregarImagemModeloFirebaseUsecase carregarImagemModeloFirebaseUsecase;
+  final CarregarImagemModeloDatabaseUsecase carregarImagemModeloDatabaseUsecase;
   final UploadArquivoHtmlPresenter uploadArquivoHtmlPresenter;
   final CarregarRemessasFirebaseUsecase carregarRemessasFirebaseUsecase;
   final CarregarBoletosFirebaseUsecase carregarBoletosFirebaseUsecase;
@@ -20,7 +20,7 @@ class RemessasController extends GetxController
   final UploadAnaliseArquivosFirebaseUsecase
       uploadAnaliseArquivosFirebaseUsecase;
   RemessasController({
-    required this.carregarImagemModeloFirebaseUsecase,
+    required this.carregarImagemModeloDatabaseUsecase,
     required this.uploadArquivoHtmlPresenter,
     required this.carregarRemessasFirebaseUsecase,
     required this.carregarBoletosFirebaseUsecase,
@@ -50,7 +50,7 @@ class RemessasController extends GetxController
   @override
   void onReady() {
     super.onReady();
-    // _carregarImagemModelo();
+    _carregarImagemModelo();
     _carregarRemessas();
   }
 
@@ -67,7 +67,7 @@ class RemessasController extends GetxController
   final _listTadasRemessas = <RemessaModel>[].obs;
 
   Future<void> _carregarImagemModelo() async {
-    final modelo = await carregarImagemModeloFirebaseUsecase(
+    final modelo = await carregarImagemModeloDatabaseUsecase(
       parameters: NoParams(
         error: ErroUploadArquivo(
           message: "Erro ao Erro ao carregar os arquivos.",
@@ -77,7 +77,8 @@ class RemessasController extends GetxController
       ),
     );
     if (modelo.status == StatusResult.success) {
-      _imagemModelo(modelo.result);
+      final image = modelo.result as ImagemModeloModel;
+      _imagemModelo(image.arquivo);
     }
   }
 
