@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dependencies_module/dependencies_module.dart';
 import 'package:file_picker/file_picker.dart';
 

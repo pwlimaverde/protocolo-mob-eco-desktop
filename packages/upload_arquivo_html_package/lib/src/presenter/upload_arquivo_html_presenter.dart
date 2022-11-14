@@ -8,9 +8,6 @@ import '../features/arquivos_html/leitura_arquivo_html/domain/usecase/leitura_ar
 import '../utils/errors/erros_decoder_upload_csv_web.dart';
 import '../utils/parametros/parametos.dart';
 
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-
 class UploadArquivoHtmlPresenter
     implements Presenter<List<Map<String, Uint8List>>> {
   @override

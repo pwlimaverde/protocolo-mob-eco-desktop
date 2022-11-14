@@ -15,7 +15,7 @@ export 'package:percent_indicator/circular_percent_indicator.dart';
 export 'package:percent_indicator/percent_indicator.dart';
 
 ///Modulos
-// export 'package:design_system_module/design_system_module.dart';
+export 'package:design_system_module/design_system_module.dart';
 export 'package:core_module/core_module.dart';
 // export 'package:splash_module/splash_module.dart';
 // export 'package:login_module/login_module.dart';

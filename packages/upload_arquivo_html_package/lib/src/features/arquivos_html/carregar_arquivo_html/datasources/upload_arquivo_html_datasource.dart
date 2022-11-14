@@ -1,6 +1,4 @@
 import 'package:dependencies_module/dependencies_module.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 
 class UploadArquivoHtmlDatasource implements Datasource<List<html.File>> {
   @override

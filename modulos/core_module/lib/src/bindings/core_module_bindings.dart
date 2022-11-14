@@ -23,10 +23,10 @@ class CoreModuleBindings implements Bindings {
       dataBase.box<BoletoModel>(),
       permanent: true,
     );
-    // Get.put<DesignSystemController>(
-    //   DesignSystemController(),
-    //   permanent: true,
-    // );
+    Get.put<DesignSystemController>(
+      DesignSystemController(),
+      permanent: true,
+    );
     // Get.put<RemessasController>(
     //   RemessasController(
     //     carregarRemessasFirebaseUsecase: CarregarRemessasFirebaseUsecase(
