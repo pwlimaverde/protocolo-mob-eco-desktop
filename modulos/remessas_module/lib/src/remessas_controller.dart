@@ -51,7 +51,7 @@ class RemessasController extends GetxController
   void onReady() {
     super.onReady();
     // _carregarImagemModelo();
-    // _carregarRemessas();
+    _carregarRemessas();
   }
 
   @override
@@ -402,17 +402,24 @@ class RemessasController extends GetxController
 
   Future<void> _carregarRemessas() async {
     _clearLists();
-    final uploadFirebase = await carregarRemessasFirebaseUsecase(
-      parameters: NoParams(
-        error: ErroUploadArquivo(message: "Error ao carregar as remessas"),
-        showRuntimeMilliseconds: true,
-        nameFeature: "Carregar Remessas",
-      ),
-    );
+    // final uploadFirebase = await carregarRemessasFirebaseUsecase(
+    //   parameters: NoParams(
+    //     error: ErroUploadArquivo(message: "Error ao carregar as remessas"),
+    //     showRuntimeMilliseconds: true,
+    //     nameFeature: "Carregar Remessas",
+    //   ),
+    // );
 
-    if (uploadFirebase.status == StatusResult.success) {
-      _listTadasRemessas.bindStream(uploadFirebase.result);
-    }
+    // if (uploadFirebase.status == StatusResult.success) {
+    //   _listTadasRemessas.bindStream(uploadFirebase.result);
+    // }
+
+    final todasTemessas = dataBaseRemessa
+        .query()
+        .watch(triggerImmediately: true)
+        .map((query) => query.find());
+
+    _listTadasRemessas.bindStream(todasTemessas);
   }
 
   Future<List<BoletoModel>> carregarBoletos(RemessaModel remessa) async {
