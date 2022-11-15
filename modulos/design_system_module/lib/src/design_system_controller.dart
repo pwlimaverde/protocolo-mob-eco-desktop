@@ -508,7 +508,7 @@ class DesignSystemController extends GetxController
       boletos.add(value);
     }
 
-    const tamanhoDownload = 500;
+    const tamanhoDownload = 1000;
     final quantidadeDeboletos = boletos.length;
     final quantidadeDeArquivos =
         ((quantidadeDeboletos / tamanhoDownload) + 0.4999).round();
@@ -805,14 +805,6 @@ class DesignSystemController extends GetxController
       ),
       _listaConferenciaPrintWidget(boletos: boletos)
     ];
-    // final protocolos = _protocolosListPrintWidget(
-    //   remessa: filtro,
-    //   netImage: netImage,
-    //   boletos: boletos,
-    // );
-    // testeFuturo.add(protocolos);
-    // final listConferencia = _listaConferenciaPrintWidget(boletos: boletos);
-    // testeFuturo.add(listConferencia);
 
     final Iterable<Future<pw.Widget>> processarWidgetFuturo =
         testeFuturo.map((arquivo) => arquivo);
@@ -824,7 +816,7 @@ class DesignSystemController extends GetxController
 
     pdf.addPage(
       pw.MultiPage(
-        maxPages: 126,
+        maxPages: 260,
         pageFormat: PdfPageFormat.a4.copyWith(
           marginBottom: 10,
           marginLeft: 20,
@@ -843,7 +835,7 @@ class DesignSystemController extends GetxController
 
     pdf.addPage(
       pw.MultiPage(
-        maxPages: 10,
+        maxPages: 20,
         pageFormat: PdfPageFormat.a4.copyWith(
           marginBottom: 10,
           marginLeft: 20,
