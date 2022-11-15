@@ -70,6 +70,23 @@ class ParametrosRemoverRemessa implements ParametersReturnResult {
   });
 }
 
+class ParametrosAlterarRemessa implements ParametersReturnResult {
+  final int idRemessa;
+  @override
+  final AppError error;
+  @override
+  final bool showRuntimeMilliseconds;
+  @override
+  final String nameFeature;
+
+  ParametrosAlterarRemessa({
+    required this.idRemessa,
+    required this.error,
+    required this.showRuntimeMilliseconds,
+    required this.nameFeature,
+  });
+}
+
 class ParametrosCarregarBoletos implements ParametersReturnResult {
   final RemessaModel remessaCarregada;
   @override

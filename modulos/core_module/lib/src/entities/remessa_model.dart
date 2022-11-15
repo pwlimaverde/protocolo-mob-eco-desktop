@@ -4,6 +4,7 @@ import 'package:dependencies_module/dependencies_module.dart';
 class RemessaModel {
   int id = 0;
   final String nomeArquivo;
+  String? tipo = "";
   List<int>? arquivosInvalidos;
 
   @Property(type: PropertyType.date)

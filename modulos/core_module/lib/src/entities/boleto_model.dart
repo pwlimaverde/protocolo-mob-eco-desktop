@@ -53,7 +53,6 @@ class BoletoModel {
     this.telefoneFixo,
     this.telefoneMovel,
     required this.idContrato,
-    this.tipo,
     this.dataHabilitacaoContrato,
     this.numeroDeBoleto,
     this.formaDeCobranca,

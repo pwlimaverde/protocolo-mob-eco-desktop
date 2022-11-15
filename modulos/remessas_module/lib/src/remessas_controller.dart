@@ -13,6 +13,7 @@ class RemessasController extends GetxController
   final UploadArquivoHtmlPresenter uploadArquivoHtmlPresenter;
   final CarregarRemessasDatabaseUsecase carregarRemessasDatabaseUsecase;
   final RemoverRemessaDatabaseUsecase removerRemessaDatabaseUsecase;
+  final TipoRemessaDatabaseUsecase tipoRemessaDatabaseUsecase;
   final MapeamentoNomesArquivoHtmlUsecase mapeamentoNomesArquivoHtmlUsecase;
   final LimparAnaliseArquivosFirebaseUsecase
       limparAnaliseArquivosFirebaseUsecase;
@@ -23,6 +24,7 @@ class RemessasController extends GetxController
     required this.uploadArquivoHtmlPresenter,
     required this.carregarRemessasDatabaseUsecase,
     required this.removerRemessaDatabaseUsecase,
+    required this.tipoRemessaDatabaseUsecase,
     required this.mapeamentoNomesArquivoHtmlUsecase,
     required this.limparAnaliseArquivosFirebaseUsecase,
     required this.uploadAnaliseArquivosFirebaseUsecase,
@@ -97,6 +99,17 @@ class RemessasController extends GetxController
         error: ErroRemoveRemessa(message: "Erro ao remover a remessa"),
         showRuntimeMilliseconds: true,
         nameFeature: "Remover Remessa",
+      ),
+    );
+  }
+
+  Future<void> tipoRemessa({required int idRemessa}) async {
+    await tipoRemessaDatabaseUsecase(
+      parameters: ParametrosAlterarRemessa(
+        idRemessa: idRemessa,
+        error: ErroRemoveRemessa(message: "Erro ao alterar a remessa"),
+        showRuntimeMilliseconds: true,
+        nameFeature: "Tipo Remessa",
       ),
     );
   }

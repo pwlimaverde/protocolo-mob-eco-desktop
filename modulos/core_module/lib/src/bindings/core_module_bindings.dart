@@ -56,6 +56,9 @@ class CoreModuleBindings implements Bindings {
         removerRemessaDatabaseUsecase: RemoverRemessaDatabaseUsecase(
           datasource: RemoverRemessaDatabaseDatasource(),
         ),
+        tipoRemessaDatabaseUsecase: TipoRemessaDatabaseUsecase(
+          datasource: TipoRemessaDatabaseDatasource(),
+        ),
       ),
       permanent: true,
     );

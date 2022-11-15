@@ -14,3 +14,5 @@ export 'src/features/carregar_imagem_modelo_database/datasources/carregar_imagem
 export 'src/features/carregar_imagem_modelo_database/domain/usecase/carregar_imagem_modelo_database_usecase.dart';
 export 'src/features/remover_remessa_database/datasources/remover_remessa_database_datasource.dart';
 export 'src/features/remover_remessa_database/domain/usecase/remover_remessa_database_usecase.dart';
+export 'src/features/tipo_remessa_database/datasources/tipo_remessa_database_datasource.dart';
+export 'src/features/tipo_remessa_database/domain/usecase/tipo_remessa_database_usecase.dart';
