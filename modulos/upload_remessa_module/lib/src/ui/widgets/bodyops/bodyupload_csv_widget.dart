@@ -99,12 +99,6 @@ _uploadRemessaList() {
                       Text(
                         "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                       ),
-                      remessaModel.arquivosInvalidos != null
-                          ? Text(
-                              "Arquivos inválidos: ${remessaModel.arquivosInvalidos.toString()}",
-                              style: const TextStyle(color: Colors.red),
-                            )
-                          : Container(),
                     ],
                   ),
                   trailing: SizedBox(
@@ -168,12 +162,6 @@ _duplicadasRemessaList() {
                       Text(
                         "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                       ),
-                      remessaModel.arquivosInvalidos != null
-                          ? Text(
-                              "Arquivos inválidos: ${remessaModel.arquivosInvalidos.toString()}",
-                              style: const TextStyle(color: Colors.red),
-                            )
-                          : Container(),
                     ],
                   ),
                 ),

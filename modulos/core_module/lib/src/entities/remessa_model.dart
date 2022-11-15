@@ -4,8 +4,9 @@ import 'package:dependencies_module/dependencies_module.dart';
 class RemessaModel {
   int id = 0;
   final String nomeArquivo;
-  String? tipo = "";
-  List<int>? arquivosInvalidos;
+  String tipo = "";
+
+  List<String> arquivosInvalidos = [];
 
   @Property(type: PropertyType.date)
   final DateTime data;
@@ -13,12 +14,23 @@ class RemessaModel {
   @Property(type: PropertyType.date)
   final DateTime upload;
 
+  bool get isOk {
+    final boletosVerificados =
+        boletos.where((element) => element.isVerificado == true).toList();
+    return boletosVerificados.length == boletos.length ? true : false;
+  }
+
+  List<BoletoModel> get protocolosSemBoletos =>
+      boletos.where((element) => element.isVerificado == false).toList();
+
+  List<BoletoModel> get protocolosComBoletos =>
+      boletos.where((element) => element.isVerificado == true).toList();
+
   @Backlink()
   final boletos = ToMany<BoletoModel>();
 
   RemessaModel({
     required this.nomeArquivo,
-    this.arquivosInvalidos,
     required this.data,
     required this.upload,
   });

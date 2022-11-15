@@ -1,7 +1,7 @@
 import 'package:dependencies_module/dependencies_module.dart';
 import '../../../utils/parametros/parametros_remessas_module.dart';
 
-class MapeamentoNomesArquivoHtmlDatasource
+class MapeamentoNomesArquivoPdfDatasource
     implements Datasource<List<Map<int, Uint8List>>> {
   @override
   Future<List<Map<int, Uint8List>>> call(

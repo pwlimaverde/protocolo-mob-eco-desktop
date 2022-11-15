@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:archive/archive.dart';
@@ -14,20 +15,20 @@ class RemessasController extends GetxController
   final CarregarRemessasDatabaseUsecase carregarRemessasDatabaseUsecase;
   final RemoverRemessaDatabaseUsecase removerRemessaDatabaseUsecase;
   final TipoRemessaDatabaseUsecase tipoRemessaDatabaseUsecase;
-  final MapeamentoNomesArquivoHtmlUsecase mapeamentoNomesArquivoHtmlUsecase;
-  final LimparAnaliseArquivosFirebaseUsecase
-      limparAnaliseArquivosFirebaseUsecase;
-  final UploadAnaliseArquivosFirebaseUsecase
-      uploadAnaliseArquivosFirebaseUsecase;
+  final MapeamentoNomesArquivoPdfUsecase mapeamentoNomesArquivoPdfUsecase;
+  final LimparAnaliseArquivosDatabaseUsecase
+      limparAnaliseArquivosDatabaseUsecase;
+  final UploadAnaliseArquivosDatabaseUsecase
+      uploadAnaliseArquivosDatabaseUsecase;
   RemessasController({
     required this.carregarImagemModeloDatabaseUsecase,
     required this.uploadArquivoHtmlPresenter,
     required this.carregarRemessasDatabaseUsecase,
     required this.removerRemessaDatabaseUsecase,
     required this.tipoRemessaDatabaseUsecase,
-    required this.mapeamentoNomesArquivoHtmlUsecase,
-    required this.limparAnaliseArquivosFirebaseUsecase,
-    required this.uploadAnaliseArquivosFirebaseUsecase,
+    required this.mapeamentoNomesArquivoPdfUsecase,
+    required this.limparAnaliseArquivosDatabaseUsecase,
+    required this.uploadAnaliseArquivosDatabaseUsecase,
   });
 
   final List<Tab> myTabs = <Tab>[
@@ -115,21 +116,18 @@ class RemessasController extends GetxController
   }
 
   Future<void> setUploadNomesArquivos({required RemessaModel remessa}) async {
-    designSystemController.setLoading(value: 0.0001);
     await _uploadNomesArquivos(
-      arquivosDaRemessa:
-          await compute(_mapeamentoDadosArquivo, await _carregarArquivos()),
+      arquivosDaRemessa: await _mapeamentoDadosArquivo(
+        await _carregarArquivos(),
+      ),
       remessa: remessa,
     );
-    designSystemController.setLoading(value: 1.0);
-    Future.delayed(const Duration(seconds: 2))
-        .then((value) => designSystemController.setLoading(value: 0.0));
   }
 
   Future<void> limparAnalise({
-    required String idRemessa,
+    required int idRemessa,
   }) async {
-    await limparAnaliseArquivosFirebaseUsecase(
+    await limparAnaliseArquivosDatabaseUsecase(
       parameters: ParametrosLimparAnaliseArquivos(
         error: ErroUploadArquivo(
             message:
@@ -146,7 +144,6 @@ class RemessasController extends GetxController
     required RemessaModel remessa,
   }) async {
     try {
-      designSystemController.setLoading(value: 0.26);
       final boletosOrdenados = remessa.boletos;
 
       if (arquivosDaRemessa.isNotEmpty) {
@@ -156,16 +153,17 @@ class RemessasController extends GetxController
         int indexArquivoOk = 0;
         List<int> idsOk = [];
         List<int> idsError = [];
-        // List<dynamic> idsCliente = remessa.idsClientes;
+        List<int> idsCliente =
+            remessa.boletos.map((element) => element.idCliente).toList();
         List<int> arquivosInvalidos = [];
 
-        // final testeOK = remessa.protocolosOk;
+        final testeOK = remessa.protocolosComBoletos;
 
-        // if (testeOK != null) {
-        //   for (dynamic element in testeOK) {
-        //     idsOk.add(element);
-        //   }
-        // }
+        if (testeOK.isNotEmpty) {
+          for (BoletoModel element in testeOK) {
+            idsOk.add(element.idCliente);
+          }
+        }
 
         for (Map<int, Uint8List> element in arquivosDaRemessa) {
           idsArquivosRemessa.add(element.keys.first);
@@ -204,13 +202,13 @@ class RemessasController extends GetxController
           }
         }
 
-        // for (int arquivo in idsArquivosRemessa) {
-        //   final compare =
-        //       idsCliente.where((element) => element == arquivo).length == 1;
-        //   if (!compare) {
-        //     arquivosInvalidos.add(arquivo);
-        //   }
-        // }
+        for (int arquivo in idsArquivosRemessa) {
+          final compare =
+              idsCliente.where((element) => element == arquivo).length == 1;
+          if (!compare) {
+            arquivosInvalidos.add(arquivo);
+          }
+        }
 
         idsOk.sort(
           (a, b) => a.compareTo(b),
@@ -221,17 +219,18 @@ class RemessasController extends GetxController
           "Protocolos sem boletos": idsError,
           "Arquivos invalidos": arquivosInvalidos
         };
-        designSystemController.setLoading(value: 0.30);
-        _enviarNovaAnalise(
+
+        designSystemController.setLoading(value: 0.2);
+        await _enviarNovaAnalise(
           analise: result,
           model: remessa,
         );
-        designSystemController.setLoading(value: 0.35);
-        _processamentoPdf(
+
+        designSystemController.setLoading(value: 0.3);
+        await _processamentoPdf(
             arquivosPdfOk: arquivosOk, nomeRemessa: remessa.nomeArquivo);
       }
     } catch (e) {
-      designSystemController.setLoading(value: 0.0);
       designSystemController.message(
         MessageModel.error(
           title: 'Upload de Remessa',
@@ -246,18 +245,15 @@ class RemessasController extends GetxController
     required List<Map<String, dynamic>> arquivosPdfOk,
     required String nomeRemessa,
   }) async {
-    designSystemController.setLoading(value: 0.55);
     final Iterable<Future<Map<String, Uint8List>>> salvarPdfFuturo =
-        arquivosPdfOk.map((arquivo) => compute(_salvarPdf, arquivo));
+        arquivosPdfOk.map((arquivo) => _salvarPdf(arquivo));
 
     final Future<Iterable<Map<String, Uint8List>>> waitedRemessas =
         Future.wait(salvarPdfFuturo);
 
     final pdfs = await waitedRemessas.then((value) => value.toList());
-    designSystemController.setLoading(value: 0.70);
 
-    compute(_downloadFilesAsZIP, {"files": pdfs, "nomeRemessa": nomeRemessa});
-    designSystemController.setLoading(value: 0.95);
+    await _downloadFilesAsZIP({"files": pdfs, "nomeRemessa": nomeRemessa});
   }
 
   Future<Map<String, Uint8List>> _salvarPdf(
@@ -282,10 +278,11 @@ class RemessasController extends GetxController
     var downloadPath = pathList.getRange(0, 4).join("\\");
     var testeFile = await File(join(downloadPath, remessaNome, fileName))
         .create(recursive: true);
-    await testeFile.writeAsBytes(bytes);
+    await compute(testeFile.writeAsBytes, bytes);
   }
 
-  _downloadFilesAsZIP(Map<String, dynamic> zips) {
+  Future<void> _downloadFilesAsZIP(Map<String, dynamic> zips) async {
+    List<Map<String, dynamic>> zipDownload = [];
     final files = zips["files"];
     final nomeRemessa = zips["nomeRemessa"];
     const tamanhoDownload = 500;
@@ -295,11 +292,13 @@ class RemessasController extends GetxController
     var filesPart = files;
 
     for (int i = 0; i < quantidadeDeZips; i++) {
-      final testeLoading = ((i + 1) * 100) / quantidadeDeZips;
-      final testeLoading2 = (testeLoading * 25) / 100;
-      designSystemController.setLoading(
-          value: 0.7 + (testeLoading2 / 100).round());
-      print(0.7 + (testeLoading2 / 100));
+      // final testeLoading = int.parse(
+      //     (((i + 1) * 100) / quantidadeDeZips).toString().split(".")[0]);
+      // final testeLoading2 = double.parse(
+      //     (int.parse(((((testeLoading * 60)) / 100)).toString().split(".")[0]) /
+      //             100)
+      //         .toStringAsFixed(2));
+      // designSystemController.setLoading(value: 0.3 + testeLoading2);
       final teste = filesPart.take(tamanhoDownload);
       var encoder = ZipEncoder();
       var archive = Archive();
@@ -316,30 +315,55 @@ class RemessasController extends GetxController
       final bytes = encoder.encode(archive,
           level: Deflate.BEST_COMPRESSION, output: outputStream);
 
-      // saveAndLaunchFile(bytes!,
-      //     "${i + 1} de $quantidadeDeZips - Remessa ordenada - $nomeRemessa.zip");
+      if (bytes != null) {
+        zipDownload.add({
+          "nome":
+              "${i + 1} de $quantidadeDeZips - Remessa ordenada - $nomeRemessa.zip",
+          "arquivo": bytes,
+          "pasta": nomeRemessa
+        });
+      }
 
       if (filesPart.length > tamanhoDownload) {
         filesPart.removeRange(0, tamanhoDownload);
       }
     }
+    final Iterable<Future<Map<String, dynamic>>> salvarZipFuturo =
+        zipDownload.map((arquivo) => _zipDownload(zip: arquivo));
+
+    final Future<Iterable<Map<String, dynamic>>> waitedZipFuturo =
+        Future.wait(salvarZipFuturo);
+
+    final waited = await waitedZipFuturo.then((value) => value.toList());
+
+    // await saveAndLaunchFile(
+    //         decodeZip,
+    //         "${i + 1} de $quantidadeDeZips - Remessa ordenada - $nomeRemessa.zip",
+    //         nomeRemessa);
+  }
+
+  Future<Map<String, dynamic>> _zipDownload(
+      {required Map<String, dynamic> zip}) async {
+    await saveAndLaunchFile(
+        zip["arquivo"] as Uint8List, zip["nome"], zip["pasta"]);
+    return zip;
   }
 
   Future<bool> _enviarNovaAnalise({
     required RemessaModel model,
     required Map<String, List<int>> analise,
   }) async {
-    final uploadFirebase = await compute(
-        _uploadAnalise,
-        ParametrosUploadAnaliseArquivos(
-          error: ErroUploadArquivo(
-              message:
-                  "Erro ao fazer o upload da Remessa para o banco de dados!"),
-          showRuntimeMilliseconds: true,
-          nameFeature: "upload firebase",
-          mapAliseArquivos: analise,
-          remessa: model,
-        ));
+    final uploadFirebase = await _uploadAnalise(
+      ParametrosUploadAnaliseArquivos(
+        error: ErroUploadArquivo(
+            message:
+                "Erro ao fazer o upload da Remessa para o banco de dados!"),
+        showRuntimeMilliseconds: true,
+        nameFeature: "upload firebase",
+        mapAliseArquivos: analise,
+        remessa: model,
+      ),
+    );
     // final uploadFirebase2 = await uploadAnaliseArquivosFirebaseUsecase(
     //   parameters: ParametrosUploadAnaliseArquivos(
     //     error: ErroUploadArquivo(
@@ -354,7 +378,6 @@ class RemessasController extends GetxController
     if (uploadFirebase.status == StatusResult.success) {
       return true;
     } else {
-      designSystemController.setLoading(value: 0.0);
       designSystemController.message(
         MessageModel.error(
           title: 'Upload de Analise Firebase',
@@ -367,16 +390,16 @@ class RemessasController extends GetxController
 
   Future<ReturnSuccessOrError<bool>> _uploadAnalise(
       ParametrosUploadAnaliseArquivos parametros) async {
-    final result = await uploadAnaliseArquivosFirebaseUsecase(
+    final result = await uploadAnaliseArquivosDatabaseUsecase(
       parameters: parametros,
     );
     return result;
   }
 
   Future<List<Map<int, Uint8List>>> _mapeamentoDadosArquivo(
-      List<Map<String, Uint8List>> listaMapBytes) async {
-    designSystemController.setLoading(value: 0.05);
-    final mapeamento = await mapeamentoNomesArquivoHtmlUsecase(
+    List<Map<String, Uint8List>> listaMapBytes,
+  ) async {
+    final mapeamento = await mapeamentoNomesArquivoPdfUsecase(
       parameters: ParametrosMapeamentoArquivoHtml(
         error: ErroUploadArquivo(
           message: "Erro ao mapear os arquivos.",
@@ -387,10 +410,8 @@ class RemessasController extends GetxController
       ),
     );
     if (mapeamento.status == StatusResult.success) {
-      designSystemController.setLoading(value: 0.2);
       return mapeamento.result;
     } else {
-      designSystemController.setLoading(value: 0.0);
       designSystemController.message(
         MessageModel.error(
           title: 'Mapeamento de arquivos',
@@ -402,7 +423,6 @@ class RemessasController extends GetxController
   }
 
   Future<List<Map<String, Uint8List>>> _carregarArquivos() async {
-    designSystemController.setLoading(value: 0.001);
     final arquivos = await uploadArquivoHtmlPresenter(
       parameters: NoParams(
         error: ErroUploadArquivo(
@@ -412,11 +432,9 @@ class RemessasController extends GetxController
         nameFeature: "Carregamento de Arquivo",
       ),
     );
-    designSystemController.setLoading(value: 0.01);
     if (arquivos.status == StatusResult.success) {
       return arquivos.result;
     } else {
-      designSystemController.setLoading(value: 0.0);
       designSystemController.message(
         MessageModel.error(
           title: 'Carregamento de arquivos',

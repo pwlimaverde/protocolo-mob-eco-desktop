@@ -1,9 +1,9 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
-class LimparAnaliseArquivosFirebaseUsecase extends UseCaseImplement<bool> {
+class LimparAnaliseArquivosDatabaseUsecase extends UseCaseImplement<bool> {
   final Datasource<bool> datasource;
 
-  LimparAnaliseArquivosFirebaseUsecase({
+  LimparAnaliseArquivosDatabaseUsecase({
     required this.datasource,
   });
 

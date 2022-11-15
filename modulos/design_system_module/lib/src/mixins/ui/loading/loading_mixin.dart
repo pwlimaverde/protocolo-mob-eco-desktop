@@ -17,7 +17,8 @@ mixin LoadingMixin on GetxController {
 void _loadUi(double loading) {
   Get.back();
   if (loading > 0.0) {
-    print("${loading * 100}%");
+    double loadingArredondado = double.parse(loading.toStringAsFixed(2));
+    print("${loadingArredondado * 100}%");
     Get.dialog(
       Align(
         alignment: Alignment.center,
@@ -29,9 +30,9 @@ void _loadUi(double loading) {
               radius: 50.0,
               lineWidth: 13.0,
               animation: true,
-              percent: loading,
+              percent: loadingArredondado,
               center: Text(
-                "${loading < 0.05 ? 0 : loading * 100}%",
+                "${loading < 0.05 ? 0 : loadingArredondado * 100}%",
                 style: const TextStyle(
                     fontWeight: FontWeight.bold, fontSize: 20.0),
               ),

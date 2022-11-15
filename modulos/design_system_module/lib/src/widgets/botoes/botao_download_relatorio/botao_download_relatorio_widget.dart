@@ -32,12 +32,12 @@ class BotaoDownloadRelatorio extends StatelessWidget {
             Icon(
               ativo
                   ? Icons.check
-                  : alerta
+                  : !alerta
                       ? Icons.error_outline_outlined
                       : Icons.error,
               color: ativo
                   ? Colors.green
-                  : alerta
+                  : !alerta
                       ? Colors.grey
                       : Colors.red,
               size: size,

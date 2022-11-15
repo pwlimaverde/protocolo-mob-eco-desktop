@@ -37,7 +37,7 @@ class ParametrosUploadAnaliseArquivos implements ParametersReturnResult {
 }
 
 class ParametrosLimparAnaliseArquivos implements ParametersReturnResult {
-  final String idRemessa;
+  final int idRemessa;
   @override
   final AppError error;
   @override

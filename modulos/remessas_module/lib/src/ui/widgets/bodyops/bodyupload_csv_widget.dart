@@ -70,7 +70,6 @@ _todasRemessasList() {
           String nomeRemessa = remessaModel.nomeArquivo.length >= 100
               ? remessaModel.nomeArquivo.substring(0, 100)
               : remessaModel.nomeArquivo;
-
           return Center(
             child: Dismissible(
               key: Key(remessaModel.id.toString()),
@@ -116,13 +115,11 @@ _todasRemessasList() {
                           Text(
                             "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                           ),
-                          remessaModel.arquivosInvalidos != null
-                              ? remessaModel.arquivosInvalidos!.isNotEmpty
-                                  ? Text(
-                                      "Arquivos inválidos: ${remessaModel.arquivosInvalidos.toString()}",
-                                      style: const TextStyle(color: Colors.red),
-                                    )
-                                  : Container()
+                          remessaModel.arquivosInvalidos.isNotEmpty
+                              ? Text(
+                                  "Arquivos inválidos: ${remessaModel.arquivosInvalidos.toString()}",
+                                  style: const TextStyle(color: Colors.red),
+                                )
                               : Container(),
                           // Padding(
                           //   padding: const EdgeInsets.all(15.0),
@@ -156,21 +153,21 @@ _todasRemessasList() {
                             const SizedBox(
                               width: 15,
                             ),
-                            // designSystemController.botaoAnalisePdf(
-                            //   filtro: remessaModel,
-                            // ),
+                            designSystemController.botaoAnalisePdf(
+                              filtro: remessaModel,
+                            ),
                             const SizedBox(
                               width: 15,
                             ),
-                            // designSystemController.botaoDownloadRelatorio(
-                            //   filtro: remessaModel,
-                            // ),
+                            designSystemController.botaoDownloadRelatorio(
+                              filtro: remessaModel,
+                            ),
                             const SizedBox(
                               width: 15,
                             ),
-                            // designSystemController.botaoLimparAnalise(
-                            //   filtro: remessaModel,
-                            // ),
+                            designSystemController.botaoLimparAnalise(
+                              filtro: remessaModel,
+                            ),
                           ],
                         ),
                       ),

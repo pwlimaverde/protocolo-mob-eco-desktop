@@ -170,66 +170,79 @@ class DesignSystemController extends GetxController
     );
   }
 
-  // Widget botaoAnalisePdf({required RemessaModel filtro}) {
-  //   return BotaoAnalisePdf(
-  //     ativo: filtro.isOk,
-  //     height: 100,
-  //     width: 100,
-  //     size: 20,
-  //     onPressed: () => _setUploadAnalisePdf(remessa: filtro),
-  //   );
-  // }
+  Widget botaoAnalisePdf({required RemessaModel filtro}) {
+    return BotaoAnalisePdf(
+      ativo: filtro.isOk,
+      height: 100,
+      width: 100,
+      size: 20,
+      onPressed: () async {
+        setLoading(value: 0.001);
+        await Future.delayed(const Duration(milliseconds: 500));
+        await _setUploadAnalisePdf(remessa: filtro);
+        setLoading(value: 1);
+        await Future.delayed(const Duration(seconds: 1));
+        setLoading(value: 0.0);
+      },
+    );
+  }
 
-  // void _setUploadAnalisePdf({required RemessaModel remessa}) {
-  //   if (!remessa.isOk) {
-  //     remessasController.setUploadNomesArquivos(remessa: remessa);
-  //   } else {
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Analise de Arquivos",
-  //       message: "Arquivos OK!",
-  //     ));
-  //   }
-  // }
+  Future<void> _setUploadAnalisePdf({required RemessaModel remessa}) async {
+    if (!remessa.isOk) {
+      await remessasController.setUploadNomesArquivos(remessa: remessa);
+    } else {
+      designSystemController.message(MessageModel.info(
+        title: "Analise de Arquivos",
+        message: "Arquivos OK!",
+      ));
+    }
+  }
 
-  // Widget botaoDownloadRelatorio({required RemessaModel filtro}) {
-  //   return BotaoDownloadRelatorio(
-  //     alerta: filtro.protocolosSemBoletos == null,
-  //     ativo: filtro.isOk,
-  //     height: 100,
-  //     width: 100,
-  //     size: 20,
-  //     onPressed: () => _downloadAnalise(filtro: filtro),
-  //   );
-  // }
+  Widget botaoDownloadRelatorio({required RemessaModel filtro}) {
+    return BotaoDownloadRelatorio(
+      alerta: filtro.protocolosSemBoletos.isNotEmpty &&
+          filtro.protocolosComBoletos.isNotEmpty,
+      ativo: filtro.isOk,
+      height: 100,
+      width: 100,
+      size: 20,
+      onPressed: () async {
+        setLoading(value: 0.001);
+        await Future.delayed(const Duration(milliseconds: 500));
+        await _downloadAnalise(filtro: filtro);
+        setLoading(value: 1);
+        await Future.delayed(const Duration(seconds: 1));
+        setLoading(value: 0.0);
+      },
+    );
+  }
 
-  // Widget botaoLimparAnalise({required RemessaModel filtro}) {
-  //   return BotaoLimparAnalise(
-  //     ativo: filtro.protocolosSemBoletos != null ||
-  //         filtro.protocolosOk != null ||
-  //         filtro.arquivosInvalidos != null,
-  //     height: 100,
-  //     width: 100,
-  //     size: 20,
-  //     onPressed: () => _limparAnalise(filtro: filtro),
-  //   );
-  // }
+  Widget botaoLimparAnalise({required RemessaModel filtro}) {
+    return BotaoLimparAnalise(
+      ativo: filtro.protocolosComBoletos.isNotEmpty ||
+          filtro.arquivosInvalidos.isNotEmpty,
+      height: 100,
+      width: 100,
+      size: 20,
+      onPressed: () => _limparAnalise(filtro: filtro),
+    );
+  }
 
-  // void _limparAnalise({required RemessaModel filtro}) {
-  //   if (filtro.protocolosSemBoletos != null ||
-  //       filtro.protocolosOk != null ||
-  //       filtro.arquivosInvalidos != null) {
-  //     remessasController.limparAnalise(idRemessa: filtro.id);
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Limpesa da Analise",
-  //       message: "Dados limpos!",
-  //     ));
-  //   } else {
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Limpesa da Analise",
-  //       message: "Sem dados para limpar!",
-  //     ));
-  //   }
-  // }
+  void _limparAnalise({required RemessaModel filtro}) {
+    if (filtro.protocolosComBoletos.isNotEmpty ||
+        filtro.arquivosInvalidos.isNotEmpty) {
+      remessasController.limparAnalise(idRemessa: filtro.id);
+      designSystemController.message(MessageModel.info(
+        title: "Limpesa da Analise",
+        message: "Dados limpos!",
+      ));
+    } else {
+      designSystemController.message(MessageModel.info(
+        title: "Limpesa da Analise",
+        message: "Sem dados para limpar!",
+      ));
+    }
+  }
 
   Widget _iconButtonUpload() {
     return BotaoUpload(
@@ -242,130 +255,132 @@ class DesignSystemController extends GetxController
     uploadRemessaController.setUploadRemessas();
   }
 
-  // void _downloadAnalise({required RemessaModel filtro}) async {
-  //   if (!filtro.isOk && filtro.protocolosSemBoletos != null) {
-  //     List<BoletoModel> listaBoletosErro = [];
-  //     final boletosAnalise = await remessasController.carregarBoletos(filtro);
+  Future<void> _downloadAnalise({required RemessaModel filtro}) async {
+    if (!filtro.isOk &&
+        filtro.protocolosSemBoletos.isNotEmpty &&
+        filtro.protocolosComBoletos.isNotEmpty) {
+      final boletos = filtro.protocolosSemBoletos;
 
-  //     for (dynamic idErro in filtro.protocolosSemBoletos!) {
-  //       for (BoletoModel boleto in boletosAnalise) {
-  //         if (boleto.idCliente == idErro) {
-  //           listaBoletosErro.add(boleto);
-  //         }
-  //       }
-  //     }
+      const camposKeys = <String>[
+        "ID Cliente",
+        "Cliente",
+        "Documento",
+        "Email",
+        "Telefone Fixo",
+        "Telefone Movel",
+        "ID Contrato",
+        "Tipo",
+        "Data Habilitacao contrato",
+        "Número de Boleto",
+        "Forma de Cobrança",
+        "Data Vencimento Fatura",
+        "Valor Fatura",
+        "Data Emissao Fatura",
+        "Arquivo",
+        "Data Impressão Fatura",
+        "UF",
+        "Cidade",
+        "Bairro",
+        "Tipo Logradouro",
+        "Logradouro",
+        "Numero",
+        "CEP",
+        "Solicitante da Geração",
+        "ID Fatura",
+        "Referencia",
+      ];
 
-  //     const camposKeys = <String>[
-  //       "ID Cliente",
-  //       "Cliente",
-  //       "Documento",
-  //       "Email",
-  //       "Telefone Fixo",
-  //       "Telefone Movel",
-  //       "ID Contrato",
-  //       "Data Habilitacao contrato",
-  //       "Número de Boleto",
-  //       "Forma de Cobrança",
-  //       "Data Vencimento Fatura",
-  //       "Valor Fatura",
-  //       "Data Emissao Fatura",
-  //       "Arquivo",
-  //       "Data Impressão Fatura",
-  //       "UF",
-  //       "Cidade",
-  //       "Bairro",
-  //       "Tipo Logradouro",
-  //       "Logradouro",
-  //       "Numero",
-  //       "CEP",
-  //       "Solicitante da Geração",
-  //       "ID Fatura",
-  //       "Referencia",
-  //     ];
+      var excel = Excel.createExcel();
 
-  //     var excel = Excel.createExcel();
+      Sheet sheetObject = excel[excel.getDefaultSheet()!];
+      CellStyle cellStyleTitulos = CellStyle(
+        horizontalAlign: HorizontalAlign.Center,
+        bold: true,
+      );
 
-  //     Sheet sheetObject = excel[excel.getDefaultSheet()!];
-  //     CellStyle cellStyleTitulos = CellStyle(
-  //       horizontalAlign: HorizontalAlign.Center,
-  //       bold: true,
-  //     );
+      sheetObject.merge(
+          CellIndex.indexByString("A1"), CellIndex.indexByString("X1"),
+          customValue:
+              "SISTEMA DE REGISTRO DE PROTOCOLO - PROTOCOLOS SEM ARQUIVOS DE BOLETO - ${filtro.nomeArquivo}");
 
-  //     sheetObject.merge(
-  //         CellIndex.indexByString("A1"), CellIndex.indexByString("W1"),
-  //         customValue:
-  //             "SISTEMA DE REGISTRO DE PROTOCOLO - PROTOCOLOS SEM ARQUIVOS DE BOLETO - ${filtro.nomeArquivo}");
+      var titulo = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0));
+      titulo.cellStyle = cellStyleTitulos;
 
-  //     var titulo = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0));
-  //     titulo.cellStyle = cellStyleTitulos;
+      var emissao = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 24, rowIndex: 0));
+      emissao.value = "Data Emissão :";
+      emissao.cellStyle = cellStyleTitulos;
 
-  //     var emissao = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: 23, rowIndex: 0));
-  //     emissao.value = "Data Emissão :";
-  //     emissao.cellStyle = cellStyleTitulos;
+      var dataEmissao = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 25, rowIndex: 0));
+      dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data);
+      dataEmissao.cellStyle = cellStyleTitulos;
 
-  //     var dataEmissao = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: 24, rowIndex: 0));
-  //     dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data.toDate());
-  //     dataEmissao.cellStyle = cellStyleTitulos;
+      for (var coluna = 0; coluna < camposKeys.length; coluna++) {
+        var cell = sheetObject
+            .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
+        cell.value = camposKeys[coluna];
+        cell.cellStyle = cellStyleTitulos;
+      }
 
-  //     for (var coluna = 0; coluna < camposKeys.length; coluna++) {
-  //       var cell = sheetObject
-  //           .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
-  //       cell.value = camposKeys[coluna];
-  //       cell.cellStyle = cellStyleTitulos;
-  //     }
+      for (BoletoModel boleto in boletos) {
+        int indexBoleto = boletos.indexOf(boleto) + 2;
+        final listValores = boleto.toListXlsx();
+        int indexValor = 0;
+        for (dynamic valor in listValores) {
+          sheetObject
+              .cell(CellIndex.indexByColumnRow(
+                  columnIndex: indexValor, rowIndex: indexBoleto))
+              .value = valor;
+          indexValor++;
+        }
+      }
 
-  //     for (BoletoModel boleto in listaBoletosErro) {
-  //       int indexBoleto = listaBoletosErro.indexOf(boleto) + 2;
-  //       final listValores = boleto.toListXlsx();
-  //       int indexValor = 0;
-  //       for (dynamic valor in listValores) {
-  //         sheetObject
-  //             .cell(CellIndex.indexByColumnRow(
-  //                 columnIndex: indexValor, rowIndex: indexBoleto))
-  //             .value = valor;
-  //         indexValor++;
-  //       }
-  //     }
+      sheetObject.setColWidth(0, 10);
+      sheetObject.setColAutoFit(1);
+      sheetObject.setColWidth(2, 0);
+      sheetObject.setColWidth(3, 0);
+      sheetObject.setColWidth(4, 0);
+      sheetObject.setColWidth(5, 0);
+      sheetObject.setColAutoFit(6);
+      sheetObject.setColWidth(7, 0);
+      sheetObject.setColWidth(8, 0);
+      sheetObject.setColWidth(9, 0);
+      sheetObject.setColAutoFit(10);
+      sheetObject.setColWidth(11, 0);
+      sheetObject.setColWidth(12, 0);
+      sheetObject.setColWidth(13, 0);
+      sheetObject.setColWidth(14, 0);
+      for (var coluna = 15; coluna < camposKeys.length; coluna++) {
+        sheetObject.setColAutoFit(coluna);
+      }
+      sheetObject.setColWidth(17, 30);
+      sheetObject.setColWidth(18, 0);
+      sheetObject.setColWidth(22, 0);
+      sheetObject.setColWidth(24, 12);
 
-  //     sheetObject.setColWidth(0, 10);
-  //     sheetObject.setColAutoFit(1);
-  //     sheetObject.setColWidth(2, 0);
-  //     sheetObject.setColWidth(3, 0);
-  //     sheetObject.setColWidth(4, 0);
-  //     sheetObject.setColWidth(5, 0);
-  //     sheetObject.setColAutoFit(6);
-  //     sheetObject.setColWidth(7, 0);
-  //     sheetObject.setColWidth(8, 0);
-  //     sheetObject.setColWidth(9, 0);
-  //     sheetObject.setColAutoFit(10);
-  //     sheetObject.setColWidth(11, 0);
-  //     sheetObject.setColWidth(12, 0);
-  //     sheetObject.setColWidth(13, 0);
-  //     sheetObject.setColWidth(14, 0);
-  //     for (var coluna = 15; coluna < camposKeys.length; coluna++) {
-  //       sheetObject.setColAutoFit(coluna);
-  //     }
-  //     sheetObject.setColWidth(17, 30);
-  //     sheetObject.setColWidth(18, 0);
-  //     sheetObject.setColWidth(22, 0);
-  //     sheetObject.setColWidth(24, 12);
-  //     excel.save(fileName: "${filtro.nomeArquivo} - ERRO FILTRO.xlsx");
-  //   } else if (!filtro.isOk) {
-  //     designSystemController.message(MessageModel.error(
-  //       title: "Analise de Arquivos",
-  //       message:
-  //           "Faça o upload dos nomes dos arquivos em csv para verificação!",
-  //     ));
-  //   } else {
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Analise de Arquivos",
-  //       message: "Arquivos OK!",
-  //     ));
-  //   }
-  // }
+      final planilha =
+          excel.save(fileName: "${filtro.nomeArquivo} - ERRO FILTRO.xlsx");
+
+      if (planilha != null) {
+        await remessasController.saveAndLaunchFile(
+            planilha as Uint8List,
+            "${filtro.nomeArquivo} - ERRO FILTRO.xlsx",
+            boletos[0].remessa.target!.nomeArquivo);
+      }
+    } else if (!filtro.isOk) {
+      designSystemController.message(MessageModel.error(
+        title: "Analise de Arquivos",
+        message: "Faça o upload dos arquivos em pdf para verificação!",
+      ));
+    } else {
+      designSystemController.message(MessageModel.info(
+        title: "Analise de Arquivos",
+        message: "Arquivos OK!",
+      ));
+    }
+  }
 
   Future<void> _downloadXlsx({required RemessaModel filtro}) async {
     final boletos = filtro.boletos;
@@ -406,7 +421,6 @@ class DesignSystemController extends GetxController
       horizontalAlign: HorizontalAlign.Center,
       bold: true,
     );
-    setLoading(value: 0.1);
     sheetObject.merge(
         CellIndex.indexByString("A1"), CellIndex.indexByString("Y1"),
         customValue:
@@ -425,14 +439,12 @@ class DesignSystemController extends GetxController
         .cell(CellIndex.indexByColumnRow(columnIndex: 26, rowIndex: 0));
     dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data);
     dataEmissao.cellStyle = cellStyleTitulos;
-    setLoading(value: 0.4);
     for (var coluna = 0; coluna < camposKeys.length; coluna++) {
       var cell = sheetObject
           .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
       cell.value = camposKeys[coluna];
       cell.cellStyle = cellStyleTitulos;
     }
-    setLoading(value: 0.6);
     for (BoletoModel boleto in boletos) {
       int indexBoleto = boletos.indexOf(boleto) + 2;
       final listValores = boleto.toListXlsx();
@@ -476,20 +488,16 @@ class DesignSystemController extends GetxController
     sheetObject.setColWidth(23, 0);
     sheetObject.setColWidth(25, 25);
     sheetObject.setColWidth(26, 25);
-    setLoading(value: 0.8);
+
     final planilha =
         excel.save(fileName: "${filtro.nomeArquivo} - FILTRO.xlsx");
 
     if (planilha != null) {
-      final encodeXlsx = base64.encode(planilha);
-      final decodeXlsx = base64.decode(encodeXlsx);
-      setLoading(value: 0.9);
       await remessasController.saveAndLaunchFile(
-          decodeXlsx,
+          planilha as Uint8List,
           "${filtro.nomeArquivo} - FILTRO.xlsx",
           boletos[0].remessa.target!.nomeArquivo);
     }
-    setLoading(value: 0.98);
   }
 
   Future<void> _downloadProtocolos(
@@ -499,7 +507,7 @@ class DesignSystemController extends GetxController
     for (BoletoModel value in protocolos) {
       boletos.add(value);
     }
-    setLoading(value: 0.1);
+
     const tamanhoDownload = 500;
     final quantidadeDeboletos = boletos.length;
     final quantidadeDeArquivos =
@@ -508,8 +516,6 @@ class DesignSystemController extends GetxController
 
     for (int i = 0; i < quantidadeDeArquivos; i++) {
       final boletosTake = boletosPart.take(tamanhoDownload);
-      setLoading(
-          value: ((((i + 1) * 100) / quantidadeDeArquivos).round() - 5) / 100);
       await _generatePdf2(
           boletos: boletosTake.toList(),
           part: "${i + 1} de $quantidadeDeArquivos");

@@ -1,9 +1,9 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
-class UploadAnaliseArquivosFirebaseUsecase extends UseCaseImplement<bool> {
+class UploadAnaliseArquivosDatabaseUsecase extends UseCaseImplement<bool> {
   final Datasource<bool> datasource;
 
-  UploadAnaliseArquivosFirebaseUsecase({
+  UploadAnaliseArquivosDatabaseUsecase({
     required this.datasource,
   });
 

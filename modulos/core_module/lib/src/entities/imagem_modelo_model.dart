@@ -4,6 +4,7 @@ import 'package:dependencies_module/dependencies_module.dart';
 class ImagemModeloModel {
   int id = 0;
 
+  @Property(type: PropertyType.byteVector)
   Uint8List arquivo;
 
   ImagemModeloModel(this.arquivo);

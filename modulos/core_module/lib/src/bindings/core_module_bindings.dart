@@ -37,17 +37,17 @@ class CoreModuleBindings implements Bindings {
         carregarRemessasDatabaseUsecase: CarregarRemessasDatabaseUsecase(
           datasource: CarregarRemessasDatabaseDatasource(),
         ),
-        mapeamentoNomesArquivoHtmlUsecase: MapeamentoNomesArquivoHtmlUsecase(
-          datasource: MapeamentoNomesArquivoHtmlDatasource(),
+        mapeamentoNomesArquivoPdfUsecase: MapeamentoNomesArquivoPdfUsecase(
+          datasource: MapeamentoNomesArquivoPdfDatasource(),
         ),
         uploadArquivoHtmlPresenter: UploadArquivoHtmlPresenter(),
-        uploadAnaliseArquivosFirebaseUsecase:
-            UploadAnaliseArquivosFirebaseUsecase(
-          datasource: UploadAnaliseArquivosFirebaseDatasource(),
+        uploadAnaliseArquivosDatabaseUsecase:
+            UploadAnaliseArquivosDatabaseUsecase(
+          datasource: UploadAnaliseArquivosDatabaseDatasource(),
         ),
-        limparAnaliseArquivosFirebaseUsecase:
-            LimparAnaliseArquivosFirebaseUsecase(
-          datasource: LimparAnaliseArquivosFirebaseDatasource(),
+        limparAnaliseArquivosDatabaseUsecase:
+            LimparAnaliseArquivosDatabaseUsecase(
+          datasource: LimparAnaliseArquivosDatabaseDatasource(),
         ),
         carregarImagemModeloDatabaseUsecase:
             CarregarImagemModeloDatabaseUsecase(
