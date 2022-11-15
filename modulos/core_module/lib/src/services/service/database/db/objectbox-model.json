@@ -29,7 +29,7 @@
     },
     {
       "id": "7:6907860797311543016",
-      "lastPropertyId": "29:256676486341568772",
+      "lastPropertyId": "30:1671535238802595581",
       "name": "BoletoModel",
       "properties": [
         {
@@ -180,6 +180,11 @@
           "id": "29:256676486341568772",
           "name": "quantidadeBoletos",
           "type": 6
+        },
+        {
+          "id": "30:1671535238802595581",
+          "name": "tipo",
+          "type": 9
         }
       ],
       "relations": []

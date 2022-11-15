@@ -34,11 +34,8 @@ class CoreModuleBindings implements Bindings {
     );
     Get.put<RemessasController>(
       RemessasController(
-        carregarRemessasFirebaseUsecase: CarregarRemessasFirebaseUsecase(
-          datasource: CarregarRemessasFirebaseDatasource(),
-        ),
-        carregarBoletosFirebaseUsecase: CarregarBoletosFirebaseUsecase(
-          datasource: CarregarBoletosFirebaseDatasource(),
+        carregarRemessasDatabaseUsecase: CarregarRemessasDatabaseUsecase(
+          datasource: CarregarRemessasDatabaseDatasource(),
         ),
         mapeamentoNomesArquivoHtmlUsecase: MapeamentoNomesArquivoHtmlUsecase(
           datasource: MapeamentoNomesArquivoHtmlDatasource(),
@@ -55,6 +52,9 @@ class CoreModuleBindings implements Bindings {
         carregarImagemModeloDatabaseUsecase:
             CarregarImagemModeloDatabaseUsecase(
           datasource: CarregarImagemModeloDatabaseDatasource(),
+        ),
+        removerRemessaDatabaseUsecase: RemoverRemessaDatabaseUsecase(
+          datasource: RemoverRemessaDatabaseDatasource(),
         ),
       ),
       permanent: true,

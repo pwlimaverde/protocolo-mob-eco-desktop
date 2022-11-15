@@ -71,82 +71,110 @@ _todasRemessasList() {
               ? remessaModel.nomeArquivo.substring(0, 100)
               : remessaModel.nomeArquivo;
 
-          return Center(
-            child: Card(
-              elevation: 0.5,
-              child: SizedBox(
-                width: 700,
-                child: ListTile(
-                  title: Text(nomeRemessa),
-                  subtitle: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data)}",
-                      ),
-                      Text(
-                        "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload)}",
-                      ),
-                      Text(
-                        "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
-                      ),
-                      remessaModel.arquivosInvalidos != null
-                          ? remessaModel.arquivosInvalidos!.isNotEmpty
-                              ? Text(
-                                  "Arquivos inválidos: ${remessaModel.arquivosInvalidos.toString()}",
-                                  style: const TextStyle(color: Colors.red),
-                                )
-                              : Container()
-                          : Container(),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(15.0),
-                      //   child: LinearPercentIndicator(
-                      //     animation: true,
-                      //     lineHeight: 20.0,
-                      //     animationDuration: 2000,
-                      //     percent: posicao.value,
-                      //     center: Text("${posicao * 100} %"),
-                      //     progressColor: Colors.greenAccent,
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                  trailing: SizedBox(
-                    width: 310,
-                    height: 100,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          return Dismissible(
+            key: Key(remessaModel.nomeArquivo),
+            onDismissed: (direction) => {
+              remessasController.removerRemessa(idRemessa: remessaModel.id),
+            },
+            background: Container(
+              alignment: AlignmentDirectional.centerEnd,
+              color: Colors.redAccent,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                    const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            child: Center(
+              child: Card(
+                elevation: 0.5,
+                child: SizedBox(
+                  width: 700,
+                  child: ListTile(
+                    title: Text(nomeRemessa),
+                    subtitle: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // designSystemController.botaoPrintProtocolo(
-                        //   filtro: remessaModel,
-                        // ),
-                        const SizedBox(
-                          width: 15,
+                        Text(
+                          "Data da Remessa: ${dataFormatoDDMMYYYY.format(remessaModel.data)}",
                         ),
-                        // designSystemController.botaoDownloadXlsx(
-                        //   filtro: remessaModel,
-                        // ),
-                        const SizedBox(
-                          width: 15,
+                        Text(
+                          "Data de Upload: ${dataFormatoDDMMYYYY.format(remessaModel.upload)}",
                         ),
-                        // designSystemController.botaoAnalisePdf(
-                        //   filtro: remessaModel,
-                        // ),
-                        const SizedBox(
-                          width: 15,
+                        Text(
+                          "Quantidade de Protocolos: ${remessaModel.boletos.length.toString()}",
                         ),
-                        // designSystemController.botaoDownloadRelatorio(
-                        //   filtro: remessaModel,
-                        // ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        // designSystemController.botaoLimparAnalise(
-                        //   filtro: remessaModel,
+                        remessaModel.arquivosInvalidos != null
+                            ? remessaModel.arquivosInvalidos!.isNotEmpty
+                                ? Text(
+                                    "Arquivos inválidos: ${remessaModel.arquivosInvalidos.toString()}",
+                                    style: const TextStyle(color: Colors.red),
+                                  )
+                                : Container()
+                            : Container(),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(15.0),
+                        //   child: LinearPercentIndicator(
+                        //     animation: true,
+                        //     lineHeight: 20.0,
+                        //     animationDuration: 2000,
+                        //     percent: posicao.value,
+                        //     center: Text("${posicao * 100} %"),
+                        //     progressColor: Colors.greenAccent,
+                        //   ),
                         // ),
                       ],
+                    ),
+                    trailing: SizedBox(
+                      width: 310,
+                      height: 100,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          designSystemController.botaoPrintProtocolo(
+                            filtro: remessaModel.boletos,
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          designSystemController.botaoDownloadXlsx(
+                            filtro: remessaModel,
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          // designSystemController.botaoAnalisePdf(
+                          //   filtro: remessaModel,
+                          // ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          // designSystemController.botaoDownloadRelatorio(
+                          //   filtro: remessaModel,
+                          // ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          // designSystemController.botaoLimparAnalise(
+                          //   filtro: remessaModel,
+                          // ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

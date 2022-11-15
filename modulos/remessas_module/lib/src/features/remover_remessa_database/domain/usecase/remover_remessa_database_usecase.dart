@@ -1,15 +1,14 @@
 import 'package:dependencies_module/dependencies_module.dart';
 
-class CarregarBoletosFirebaseUsecase
-    extends UseCaseImplement<List<BoletoModel>> {
-  final Datasource<List<BoletoModel>> datasource;
+class RemoverRemessaDatabaseUsecase extends UseCaseImplement<bool> {
+  final Datasource<bool> datasource;
 
-  CarregarBoletosFirebaseUsecase({
+  RemoverRemessaDatabaseUsecase({
     required this.datasource,
   });
 
   @override
-  Future<ReturnSuccessOrError<List<BoletoModel>>> call({
+  Future<ReturnSuccessOrError<bool>> call({
     required ParametersReturnResult parameters,
   }) {
     final result = returnUseCase(

@@ -13,6 +13,19 @@ class ErroUploadRemessa implements AppError {
   }
 }
 
+class ErroRemoveRemessa implements AppError {
+  @override
+  String message;
+  ErroRemoveRemessa({
+    required this.message,
+  });
+
+  @override
+  String toString() {
+    return "ErroUploadRemessa - $message";
+  }
+}
+
 class ErroUploadBoleto implements AppError {
   @override
   String message;

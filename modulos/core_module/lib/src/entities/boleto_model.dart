@@ -14,6 +14,7 @@ class BoletoModel {
   final int? telefoneFixo;
   final int? telefoneMovel;
   final int idContrato;
+  String? tipo = "";
 
   @Property(type: PropertyType.date)
   final DateTime? dataHabilitacaoContrato;
@@ -52,6 +53,7 @@ class BoletoModel {
     this.telefoneFixo,
     this.telefoneMovel,
     required this.idContrato,
+    this.tipo,
     this.dataHabilitacaoContrato,
     this.numeroDeBoleto,
     this.formaDeCobranca,
@@ -111,56 +113,57 @@ class BoletoModel {
   //   return map;
   // }
 
-  // List<dynamic> toListXlsx() {
-  //   return [
-  //     idCliente,
-  //     cliente,
-  //     documento,
-  //     email,
-  //     telefoneFixo,
-  //     telefoneMovel,
-  //     idContrato,
-  //     dataHabilitacaoContrato != null
-  //         ? dataFormatoDDMMYYYY.format(dataHabilitacaoContrato!)
-  //         : "",
-  //     numeroDeBoleto,
-  //     formaDeCobranca,
-  //     dataVencimentoFatura != null
-  //         ? dataFormatoDDMMYYYY.format(dataVencimentoFatura!)
-  //         : "",
-  //     valorFatura != null ? "R\$ ${valorFatura!.toDouble()}" : 0.0,
-  //     dataEmissaoFatura != null
-  //         ? dataFormatoDDMMYYYY.format(dataEmissaoFatura!)
-  //         : "",
-  //     arquivo,
-  //     dataImpressaoFatura != null
-  //         ? dataFormatoDDMMYYYY.format(dataImpressaoFatura!)
-  //         : "",
-  //     uf,
-  //     cidade,
-  //     bairro,
-  //     tipoLogradouro,
-  //     logradouro,
-  //     numero,
-  //     cep,
-  //     solicitanteDaGeracao,
-  //     idFatura,
-  //     referencia,
-  //   ];
-  // }
+  List<dynamic> toListXlsx() {
+    return [
+      idCliente,
+      cliente,
+      documento,
+      email,
+      telefoneFixo,
+      telefoneMovel,
+      idContrato,
+      tipo,
+      dataHabilitacaoContrato != null
+          ? dataFormatoDDMMYYYY.format(dataHabilitacaoContrato!)
+          : "",
+      numeroDeBoleto,
+      formaDeCobranca,
+      dataVencimentoFatura != null
+          ? dataFormatoDDMMYYYY.format(dataVencimentoFatura!)
+          : "",
+      valorFatura != null ? "R\$ ${valorFatura!.toDouble()}" : 0.0,
+      dataEmissaoFatura != null
+          ? dataFormatoDDMMYYYY.format(dataEmissaoFatura!)
+          : "",
+      arquivo,
+      dataImpressaoFatura != null
+          ? dataFormatoDDMMYYYY.format(dataImpressaoFatura!)
+          : "",
+      uf,
+      cidade,
+      bairro,
+      tipoLogradouro,
+      logradouro,
+      numero,
+      cep,
+      solicitanteDaGeracao,
+      idFatura,
+      referencia,
+    ];
+  }
 
-  // String get codigoDeBarras {
-  //   final sufixo = coreModuleController.sufixo.toString().substring(0, 3);
-  //   final codBoleto = numeroDeBoleto.toString();
-  //   String complementoZero = "";
-  //   for (var zero = 0; zero < 14 - (codBoleto.length); zero++) {
-  //     complementoZero = "${complementoZero}0";
-  //   }
-  //   final tipo = formaDeCobranca!.contains("CARNE") ? "C" : "B";
-  //   const prefixo = "MB";
-  //   final padraoNovo = "$prefixo$tipo$complementoZero$codBoleto$sufixo";
-  //   return padraoNovo;
-  // }
+  String get codigoDeBarras {
+    final sufixo = coreModuleController.sufixo.toString().substring(0, 3);
+    final codBoleto = numeroDeBoleto.toString();
+    String complementoZero = "";
+    for (var zero = 0; zero < 14 - (codBoleto.length); zero++) {
+      complementoZero = "${complementoZero}0";
+    }
+    final tipo = formaDeCobranca!.contains("CARNE") ? "C" : "B";
+    const prefixo = "MB";
+    final padraoNovo = "$prefixo$tipo$complementoZero$codBoleto$sufixo";
+    return padraoNovo;
+  }
 
   factory BoletoModel.fromMapCsv({
     required Map<String, dynamic> map,

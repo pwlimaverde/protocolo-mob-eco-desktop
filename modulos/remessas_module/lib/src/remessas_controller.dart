@@ -1,5 +1,4 @@
-import 'dart:convert';
-// ignore: avoid_web_libraries_in_flutter
+import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:dependencies_module/dependencies_module.dart';
@@ -12,8 +11,8 @@ class RemessasController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final CarregarImagemModeloDatabaseUsecase carregarImagemModeloDatabaseUsecase;
   final UploadArquivoHtmlPresenter uploadArquivoHtmlPresenter;
-  final CarregarRemessasFirebaseUsecase carregarRemessasFirebaseUsecase;
-  final CarregarBoletosFirebaseUsecase carregarBoletosFirebaseUsecase;
+  final CarregarRemessasDatabaseUsecase carregarRemessasDatabaseUsecase;
+  final RemoverRemessaDatabaseUsecase removerRemessaDatabaseUsecase;
   final MapeamentoNomesArquivoHtmlUsecase mapeamentoNomesArquivoHtmlUsecase;
   final LimparAnaliseArquivosFirebaseUsecase
       limparAnaliseArquivosFirebaseUsecase;
@@ -22,8 +21,8 @@ class RemessasController extends GetxController
   RemessasController({
     required this.carregarImagemModeloDatabaseUsecase,
     required this.uploadArquivoHtmlPresenter,
-    required this.carregarRemessasFirebaseUsecase,
-    required this.carregarBoletosFirebaseUsecase,
+    required this.carregarRemessasDatabaseUsecase,
+    required this.removerRemessaDatabaseUsecase,
     required this.mapeamentoNomesArquivoHtmlUsecase,
     required this.limparAnaliseArquivosFirebaseUsecase,
     required this.uploadAnaliseArquivosFirebaseUsecase,
@@ -91,6 +90,17 @@ class RemessasController extends GetxController
     listTadasRemessas.clear();
   }
 
+  Future<void> removerRemessa({required int idRemessa}) async {
+    await removerRemessaDatabaseUsecase(
+      parameters: ParametrosRemoverRemessa(
+        idRemessa: idRemessa,
+        error: ErroRemoveRemessa(message: "Erro ao remover a remessa"),
+        showRuntimeMilliseconds: true,
+        nameFeature: "Remover Remessa",
+      ),
+    );
+  }
+
   Future<void> setUploadNomesArquivos({required RemessaModel remessa}) async {
     designSystemController.setLoading(value: 0.0001);
     await _uploadNomesArquivos(
@@ -124,7 +134,7 @@ class RemessasController extends GetxController
   }) async {
     try {
       designSystemController.setLoading(value: 0.26);
-      final boletosOrdenados = await compute(carregarBoletos, remessa);
+      final boletosOrdenados = remessa.boletos;
 
       if (arquivosDaRemessa.isNotEmpty) {
         List<dynamic> idsArquivosRemessa = [];
@@ -251,13 +261,16 @@ class RemessasController extends GetxController
     return map;
   }
 
-  // Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
-  //   html.AnchorElement(
-  //       href:
-  //           'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-  //     ..setAttribute('download', fileName)
-  //     ..click();
-  // }
+  Future<void> saveAndLaunchFile(
+      Uint8List bytes, String fileName, String remessaNome) async {
+    Directory docDir = await getApplicationDocumentsDirectory();
+    var pathList = docDir.path.split("\\");
+    pathList[3] = "Downloads";
+    var downloadPath = pathList.getRange(0, 4).join("\\");
+    var testeFile = await File(join(downloadPath, remessaNome, fileName))
+        .create(recursive: true);
+    await testeFile.writeAsBytes(bytes);
+  }
 
   _downloadFilesAsZIP(Map<String, dynamic> zips) {
     final files = zips["files"];
@@ -403,49 +416,16 @@ class RemessasController extends GetxController
 
   Future<void> _carregarRemessas() async {
     _clearLists();
-    // final uploadFirebase = await carregarRemessasFirebaseUsecase(
-    //   parameters: NoParams(
-    //     error: ErroUploadArquivo(message: "Error ao carregar as remessas"),
-    //     showRuntimeMilliseconds: true,
-    //     nameFeature: "Carregar Remessas",
-    //   ),
-    // );
+    final uploadFirebase = await carregarRemessasDatabaseUsecase(
+      parameters: NoParams(
+        error: ErroUploadArquivo(message: "Error ao carregar as remessas"),
+        showRuntimeMilliseconds: true,
+        nameFeature: "Carregar Remessas",
+      ),
+    );
 
-    // if (uploadFirebase.status == StatusResult.success) {
-    //   _listTadasRemessas.bindStream(uploadFirebase.result);
-    // }
-
-    final todasTemessas = dataBaseRemessa
-        .query()
-        .watch(triggerImmediately: true)
-        .map((query) => query.find());
-
-    _listTadasRemessas.bindStream(todasTemessas);
-  }
-
-  Future<List<BoletoModel>> carregarBoletos(RemessaModel remessa) async {
-    try {
-      final carregarBoletos = await carregarBoletosFirebaseUsecase(
-        parameters: ParametrosCarregarBoletos(
-          error: ErroUploadArquivo(message: "Error ao carregar os boletos"),
-          showRuntimeMilliseconds: true,
-          nameFeature: "Carregar Boletos",
-          remessaCarregada: remessa,
-        ),
-      );
-      if (carregarBoletos.status == StatusResult.success) {
-        final List<BoletoModel> boletos = carregarBoletos.result;
-        boletos.sort(
-          (a, b) => a.cliente.compareTo(b.cliente),
-        );
-        return boletos;
-      } else {
-        throw Exception(
-            "Erro ao carregar os dados dos boletos do banco de dados");
-      }
-    } catch (e) {
-      throw Exception(
-          "Erro ao carregar os dados dos boletos do banco de dados");
+    if (uploadFirebase.status == StatusResult.success) {
+      _listTadasRemessas.bindStream(uploadFirebase.result);
     }
   }
 }
