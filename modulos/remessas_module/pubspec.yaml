@@ -1,0 +1,24 @@
+name: remessas_module
+description: Modulo para gerenciamento das Remessas.
+publish_to: 'none'
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+  flutter: ">=3.3.8"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dependencies_module:
+    path: ../dependencies_module
+  syncfusion_flutter_pdf: ^20.3.50
+  printing: ^5.9.3
+  archive: ^3.3.2
+
+dev_dependencies:
+
+  flutter_lints: ^2.0.0
+
+flutter:
