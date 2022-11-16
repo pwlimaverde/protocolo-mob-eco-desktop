@@ -13,8 +13,8 @@ void main() {
     expect(rota, equals("/"));
   });
 
-  test('Deve retornar a rota "/splash"', () {
-    final rota = Routes.splash.caminho;
+  test('Deve retornar a rota "/home"', () {
+    final rota = Routes.initial.caminho;
 
     if (kDebugMode) {
       print(rota);

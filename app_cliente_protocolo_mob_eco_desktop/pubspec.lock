@@ -387,13 +387,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.8.4"
-  pdf_merger:
-    dependency: transitive
-    description:
-      name: pdf_merger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.6"
   percent_indicator:
     dependency: transitive
     description:

@@ -1,7 +1,7 @@
 enum Routes {
   initial(caminho: "/"),
   // home,
-  splash(caminho: "/splash"),
+  // home(caminho: "/home"),
   uploadRemessa(caminho: "/uploadremessa"),
   remessas(caminho: "/remessas");
 

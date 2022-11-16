@@ -21,7 +21,7 @@ export 'package:path_provider/path_provider.dart';
 ///Modulos
 export 'package:design_system_module/design_system_module.dart';
 export 'package:core_module/core_module.dart';
-// export 'package:splash_module/splash_module.dart';
+export 'package:splash_module/splash_module.dart';
 // export 'package:login_module/login_module.dart';
 export 'package:home_module/home_module.dart';
 export 'package:upload_remessa_module/upload_remessa_module.dart';

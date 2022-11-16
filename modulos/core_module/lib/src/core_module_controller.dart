@@ -14,7 +14,7 @@ class CoreModuleController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _carregarSufixo();
+    _carregarConfiguracoes();
     pageAtual(Get.find<GetStorage>().read("pageAtual"));
   }
 
@@ -27,7 +27,20 @@ class CoreModuleController extends GetxController {
     return _sufixo.value != null && _sufixo.value != "" ? true : false;
   }
 
-  Future<void> _carregarSufixo() async {
+  //Configuração Licença
+  final _licenca = Rxn<bool>();
+
+  bool? get licenca => _licenca.value;
+
+  bool get isCarregado {
+    return _sufixo.value != null &&
+            _licenca.value != null &&
+            remessasController.imagemModelo != null
+        ? true
+        : false;
+  }
+
+  Future<void> _carregarConfiguracoes() async {
     final result = await carregarConfiguracaoFirebaseUsecase(
         parameters: NoParams(
       error: ErroCarregarConfiguracao(
@@ -38,6 +51,7 @@ class CoreModuleController extends GetxController {
     ));
     if (result.status == StatusResult.success) {
       _sufixo(result.result["sufixo"].toString());
+      _licenca(result.result["licenca"] as bool);
     }
   }
 
