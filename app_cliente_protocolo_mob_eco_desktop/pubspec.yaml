@@ -1,7 +1,7 @@
 name: app_cliente_protocolo_mob_eco_desktop
 description: Sistema para geração de protocolos MOB.
 publish_to: 'none' 
-version: 0.0.1
+version: 0.0.2
 
 environment:
   sdk: '>=2.18.4 <3.0.0'
