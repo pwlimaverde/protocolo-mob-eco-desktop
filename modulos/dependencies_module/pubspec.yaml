@@ -2,11 +2,10 @@ name: dependencies_module
 description: Modulo responsável pelo gerenciamento das dependencias.
 publish_to: 'none'
 version: 0.0.1
-homepage:
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
-  flutter: ">=3.3.8"
+  sdk: ">=3.2.4 <4.0.0"
+  flutter: ">=3.16.7"
 
 dependencies:
   flutter:
@@ -19,14 +18,14 @@ dependencies:
     path: ../core_module
   splash_module:
     path: ../splash_module
-  login_module:
-    path: ../login_module
+  # login_module:
+  #   path: ../login_module
   home_module:
     path: ../home_module
-  upload_remessa_module:
-    path: ../upload_remessa_module
-  remessas_module:
-    path: ../remessas_module
+  # upload_remessa_module:
+  #   path: ../upload_remessa_module
+  # remessas_module:
+  #   path: ../remessas_module
 
   # Package
   upload_arquivo_html_package:
@@ -34,7 +33,7 @@ dependencies:
 
   # Externos
   return_success_or_error: ^0.4.2
-  get: ^4.6.5
+  get: ^4.6.6
   get_storage: ^2.0.3
   intl: ^0.17.0
   font_awesome_flutter: ^10.2.1

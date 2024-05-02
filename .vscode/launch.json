@@ -1,0 +1,208 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "app_cliente_protocolo_mob_eco_desktop",
+            "cwd": "app_cliente_protocolo_mob_eco_desktop",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "app_cliente_protocolo_mob_eco_desktop (profile mode)",
+            "cwd": "app_cliente_protocolo_mob_eco_desktop",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "app_cliente_protocolo_mob_eco_desktop (release mode)",
+            "cwd": "app_cliente_protocolo_mob_eco_desktop",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "core_module",
+            "cwd": "modulos\\core_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "core_module (profile mode)",
+            "cwd": "modulos\\core_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "core_module (release mode)",
+            "cwd": "modulos\\core_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "dependencies_module",
+            "cwd": "modulos\\dependencies_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "dependencies_module (profile mode)",
+            "cwd": "modulos\\dependencies_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "dependencies_module (release mode)",
+            "cwd": "modulos\\dependencies_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "design_system_module",
+            "cwd": "modulos\\design_system_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "design_system_module (profile mode)",
+            "cwd": "modulos\\design_system_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "design_system_module (release mode)",
+            "cwd": "modulos\\design_system_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "home_module",
+            "cwd": "modulos\\home_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "home_module (profile mode)",
+            "cwd": "modulos\\home_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "home_module (release mode)",
+            "cwd": "modulos\\home_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "login_module",
+            "cwd": "modulos\\login_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "login_module (profile mode)",
+            "cwd": "modulos\\login_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "login_module (release mode)",
+            "cwd": "modulos\\login_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "remessas_module",
+            "cwd": "modulos\\remessas_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "remessas_module (profile mode)",
+            "cwd": "modulos\\remessas_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "remessas_module (release mode)",
+            "cwd": "modulos\\remessas_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "splash_module",
+            "cwd": "modulos\\splash_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "splash_module (profile mode)",
+            "cwd": "modulos\\splash_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "splash_module (release mode)",
+            "cwd": "modulos\\splash_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "upload_remessa_module",
+            "cwd": "modulos\\upload_remessa_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "upload_remessa_module (profile mode)",
+            "cwd": "modulos\\upload_remessa_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "upload_remessa_module (release mode)",
+            "cwd": "modulos\\upload_remessa_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "upload_arquivo_html_package",
+            "cwd": "packages\\upload_arquivo_html_package",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "upload_arquivo_html_package (profile mode)",
+            "cwd": "packages\\upload_arquivo_html_package",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "upload_arquivo_html_package (release mode)",
+            "cwd": "packages\\upload_arquivo_html_package",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
