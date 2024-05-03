@@ -106,6 +106,7 @@ class ParametrosCarregarBoletos implements ParametersReturnResult {
 
 class ParametrosMapeamentoArquivoHtml implements ParametersReturnResult {
   final List<Map<String, Uint8List>> listaMapBytes;
+  final RemessaModel remessa;
   @override
   final AppError error;
   @override
@@ -115,6 +116,7 @@ class ParametrosMapeamentoArquivoHtml implements ParametersReturnResult {
 
   ParametrosMapeamentoArquivoHtml({
     required this.listaMapBytes,
+    required this.remessa,
     required this.error,
     required this.showRuntimeMilliseconds,
     required this.nameFeature,

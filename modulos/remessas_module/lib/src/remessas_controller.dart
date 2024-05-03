@@ -117,9 +117,8 @@ class RemessasController extends GetxController
 
   Future<void> setUploadNomesArquivos({required RemessaModel remessa}) async {
     await _uploadNomesArquivos(
-      arquivosDaRemessa: await _mapeamentoDadosArquivo(
-        await _carregarArquivos(),
-      ),
+      arquivosDaRemessa:
+          await _mapeamentoDadosArquivo(await _carregarArquivos(), remessa),
       remessa: remessa,
     );
   }
@@ -259,8 +258,6 @@ class RemessasController extends GetxController
   Future<Map<String, Uint8List>> _salvarPdf(
     Map<String, dynamic> mapArquivoPdf,
   ) async {
-    print("&&&&&&&&&&&&&");
-    print(mapArquivoPdf);
     final PdfDocument document =
         PdfDocument(inputBytes: mapArquivoPdf["Arquivo"]);
     document.pageSettings.margins = PdfMargins()..all = 5;
@@ -400,16 +397,17 @@ class RemessasController extends GetxController
 
   Future<List<Map<int, Uint8List>>> _mapeamentoDadosArquivo(
     List<Map<String, Uint8List>> listaMapBytes,
+    RemessaModel remessa,
   ) async {
     final mapeamento = await mapeamentoNomesArquivoPdfUsecase(
       parameters: ParametrosMapeamentoArquivoHtml(
-        error: ErroUploadArquivo(
-          message: "Erro ao mapear os arquivos.",
-        ),
-        nameFeature: 'Mapeamento Arquivo',
-        showRuntimeMilliseconds: true,
-        listaMapBytes: listaMapBytes,
-      ),
+          error: ErroUploadArquivo(
+            message: "Erro ao mapear os arquivos.",
+          ),
+          nameFeature: 'Mapeamento Arquivo',
+          showRuntimeMilliseconds: true,
+          listaMapBytes: listaMapBytes,
+          remessa: remessa),
     );
     if (mapeamento.status == StatusResult.success) {
       return mapeamento.result;
