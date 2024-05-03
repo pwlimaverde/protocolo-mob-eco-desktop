@@ -32,35 +32,35 @@ class CoreModuleBindings implements Bindings {
       DesignSystemController(),
       permanent: true,
     );
-    // Get.put<RemessasController>(
-    //   RemessasController(
-    //     carregarRemessasDatabaseUsecase: CarregarRemessasDatabaseUsecase(
-    //       datasource: CarregarRemessasDatabaseDatasource(),
-    //     ),
-    //     mapeamentoNomesArquivoPdfUsecase: MapeamentoNomesArquivoPdfUsecase(
-    //       datasource: MapeamentoNomesArquivoPdfDatasource(),
-    //     ),
-    //     uploadArquivoHtmlPresenter: UploadArquivoHtmlPresenter(),
-    //     uploadAnaliseArquivosDatabaseUsecase:
-    //         UploadAnaliseArquivosDatabaseUsecase(
-    //       datasource: UploadAnaliseArquivosDatabaseDatasource(),
-    //     ),
-    //     limparAnaliseArquivosDatabaseUsecase:
-    //         LimparAnaliseArquivosDatabaseUsecase(
-    //       datasource: LimparAnaliseArquivosDatabaseDatasource(),
-    //     ),
-    //     carregarImagemModeloDatabaseUsecase:
-    //         CarregarImagemModeloDatabaseUsecase(
-    //       datasource: CarregarImagemModeloDatabaseDatasource(),
-    //     ),
-    //     removerRemessaDatabaseUsecase: RemoverRemessaDatabaseUsecase(
-    //       datasource: RemoverRemessaDatabaseDatasource(),
-    //     ),
-    //     tipoRemessaDatabaseUsecase: TipoRemessaDatabaseUsecase(
-    //       datasource: TipoRemessaDatabaseDatasource(),
-    //     ),
-    //   ),
-    //   permanent: true,
-    // );
+    Get.put<RemessasController>(
+      RemessasController(
+        carregarRemessasDatabaseUsecase: CarregarRemessasDatabaseUsecase(
+          datasource: CarregarRemessasDatabaseDatasource(),
+        ),
+        mapeamentoNomesArquivoPdfUsecase: MapeamentoNomesArquivoPdfUsecase(
+          datasource: MapeamentoNomesArquivoPdfDatasource(),
+        ),
+        uploadArquivoHtmlPresenter: UploadArquivoHtmlPresenter(),
+        uploadAnaliseArquivosDatabaseUsecase:
+            UploadAnaliseArquivosDatabaseUsecase(
+          datasource: UploadAnaliseArquivosDatabaseDatasource(),
+        ),
+        limparAnaliseArquivosDatabaseUsecase:
+            LimparAnaliseArquivosDatabaseUsecase(
+          datasource: LimparAnaliseArquivosDatabaseDatasource(),
+        ),
+        carregarImagemModeloDatabaseUsecase:
+            CarregarImagemModeloDatabaseUsecase(
+          datasource: CarregarImagemModeloDatabaseDatasource(),
+        ),
+        removerRemessaDatabaseUsecase: RemoverRemessaDatabaseUsecase(
+          datasource: RemoverRemessaDatabaseDatasource(),
+        ),
+        tipoRemessaDatabaseUsecase: TipoRemessaDatabaseUsecase(
+          datasource: TipoRemessaDatabaseDatasource(),
+        ),
+      ),
+      permanent: true,
+    );
   }
 }
