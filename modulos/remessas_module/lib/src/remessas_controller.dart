@@ -259,6 +259,8 @@ class RemessasController extends GetxController
   Future<Map<String, Uint8List>> _salvarPdf(
     Map<String, dynamic> mapArquivoPdf,
   ) async {
+    print("&&&&&&&&&&&&&");
+    print(mapArquivoPdf);
     final PdfDocument document =
         PdfDocument(inputBytes: mapArquivoPdf["Arquivo"]);
     document.pageSettings.margins = PdfMargins()..all = 5;

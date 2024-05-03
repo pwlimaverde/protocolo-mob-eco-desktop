@@ -185,7 +185,7 @@ class MapeamentoDadosArquivoHtmlDatasource
     required Map<String, Uint8List> map,
   }) {
     try {
-      final decoderByte = convert.latin1.decode(map.values.first);
+      final decoderByte = convert.utf8.decode(map.values.first);
       List<List<dynamic>> listCsv = [];
       List<List<dynamic>> listaDados = [];
       Map<String, dynamic> mapCsv = {};
@@ -207,19 +207,14 @@ class MapeamentoDadosArquivoHtmlDatasource
 
       if (listaDados.isNotEmpty) {
         List<dynamic> cabecario = listCsv[0];
+
         for (List<dynamic> lista in listaDados) {
           Map<String, String> boletoModelJason = {};
           int index = 0;
           for (dynamic item in lista) {
-            if ("${cabecario[index]}" == "ï»¿ID_contrato_AIR") {
-              boletoModelJason
-                  .addAll({"ID_contrato_AIR": item != "" ? "$item" : "."});
-              index++;
-            } else {
-              boletoModelJason
-                  .addAll({"${cabecario[index]}": item != "" ? "$item" : "."});
-              index++;
-            }
+            boletoModelJason
+                .addAll({"${cabecario[index]}": item != "" ? "$item" : "."});
+            index++;
           }
           final key1 = boletoModelJason.keys.first;
 

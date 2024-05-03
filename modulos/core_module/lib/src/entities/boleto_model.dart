@@ -179,12 +179,13 @@ class BoletoModel {
         telefoneMovel: int.tryParse(map['TELL_Movel']) ?? 0,
         idContrato: int.tryParse(map['Codigo_da_fatura'].toString()) ?? 0,
         dataHabilitacaoContrato: DateTime.now(),
-        numeroDeBoleto: map['ID_Fatura'] ?? '',
+        numeroDeBoleto: map['Codigo_da_fatura'] ?? '',
         formaDeCobranca: '',
-        dataVencimentoFatura: DateTime.parse(
-            "${map['Data_Vencimento_Fatura'].toString().replaceAll("/", "-").substring(6, 10)}-${map['Data_Vencimento_Fatura'].toString().replaceAll("/", "-").substring(3, 5)}-${map['Data_Vencimento_Fatura'].toString().replaceAll("/", "-").substring(0, 2)}"),
-        valorFatura: double.tryParse(
-            map['Valor_Fatura'].split(" ")[1].toString().replaceAll(",", ".")),
+        dataVencimentoFatura: DateTime.parse(map['Data_Vencimento_Fatura']
+            .toString()
+            .split("T")[0]
+            .replaceAll("/", "-")),
+        valorFatura: double.tryParse(map['Valor_Fatura']),
         dataEmissaoFatura: DateTime.now(),
         arquivo: '',
         dataImpressaoFatura: DateTime.now(),
@@ -199,8 +200,7 @@ class BoletoModel {
         idFatura: int.tryParse(map['ID_Fatura'].toString()) ?? 0,
         referencia: map['Referencia'] ?? '',
       );
-      print("&&&&&&&&&&&&&");
-      print(boleto.cep);
+
       return boleto;
     } else {
       final boleto = BoletoModel(
