@@ -78,7 +78,7 @@ class DesignSystemController extends GetxController
                 ]
               : coreModuleController.pageAtual.value == 1
                   ? <Widget>[
-                      // _iconButtonUpload(),
+                      _iconButtonUpload(),
                     ]
                   : [],
         ),
@@ -170,361 +170,361 @@ class DesignSystemController extends GetxController
     );
   }
 
-  // Widget botaoAnalisePdf({required RemessaModel filtro}) {
-  //   return BotaoAnalisePdf(
-  //     ativo: filtro.isOk,
-  //     height: 100,
-  //     width: 100,
-  //     size: 20,
-  //     onPressed: () async {
-  //       setLoading(value: 0.001);
-  //       await Future.delayed(const Duration(milliseconds: 500));
-  //       await _setUploadAnalisePdf(remessa: filtro);
-  //       setLoading(value: 1);
-  //       await Future.delayed(const Duration(seconds: 1));
-  //       setLoading(value: 0.0);
-  //     },
-  //   );
-  // }
+  Widget botaoAnalisePdf({required RemessaModel filtro}) {
+    return BotaoAnalisePdf(
+      ativo: filtro.isOk,
+      height: 100,
+      width: 100,
+      size: 20,
+      onPressed: () async {
+        setLoading(value: 0.001);
+        await Future.delayed(const Duration(milliseconds: 500));
+        await _setUploadAnalisePdf(remessa: filtro);
+        setLoading(value: 1);
+        await Future.delayed(const Duration(seconds: 1));
+        setLoading(value: 0.0);
+      },
+    );
+  }
 
-  // Future<void> _setUploadAnalisePdf({required RemessaModel remessa}) async {
-  //   if (!remessa.isOk) {
-  //     await remessasController.setUploadNomesArquivos(remessa: remessa);
-  //   } else {
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Analise de Arquivos",
-  //       message: "Arquivos OK!",
-  //     ));
-  //   }
-  // }
+  Future<void> _setUploadAnalisePdf({required RemessaModel remessa}) async {
+    if (!remessa.isOk) {
+      await remessasController.setUploadNomesArquivos(remessa: remessa);
+    } else {
+      designSystemController.message(MessageModel.info(
+        title: "Analise de Arquivos",
+        message: "Arquivos OK!",
+      ));
+    }
+  }
 
-  // Widget botaoDownloadRelatorio({required RemessaModel filtro}) {
-  //   return BotaoDownloadRelatorio(
-  //     alerta: filtro.protocolosSemBoletos.isNotEmpty &&
-  //         filtro.protocolosComBoletos.isNotEmpty,
-  //     ativo: filtro.isOk,
-  //     height: 100,
-  //     width: 100,
-  //     size: 20,
-  //     onPressed: () async {
-  //       setLoading(value: 0.001);
-  //       await Future.delayed(const Duration(milliseconds: 500));
-  //       await _downloadAnalise(filtro: filtro);
-  //       setLoading(value: 1);
-  //       await Future.delayed(const Duration(seconds: 1));
-  //       setLoading(value: 0.0);
-  //     },
-  //   );
-  // }
+  Widget botaoDownloadRelatorio({required RemessaModel filtro}) {
+    return BotaoDownloadRelatorio(
+      alerta: filtro.protocolosSemBoletos.isNotEmpty &&
+          filtro.protocolosComBoletos.isNotEmpty,
+      ativo: filtro.isOk,
+      height: 100,
+      width: 100,
+      size: 20,
+      onPressed: () async {
+        setLoading(value: 0.001);
+        await Future.delayed(const Duration(milliseconds: 500));
+        await _downloadAnalise(filtro: filtro);
+        setLoading(value: 1);
+        await Future.delayed(const Duration(seconds: 1));
+        setLoading(value: 0.0);
+      },
+    );
+  }
 
-  // Widget botaoLimparAnalise({required RemessaModel filtro}) {
-  //   return BotaoLimparAnalise(
-  //     ativo: filtro.protocolosComBoletos.isNotEmpty ||
-  //         filtro.arquivosInvalidos.isNotEmpty,
-  //     height: 100,
-  //     width: 100,
-  //     size: 20,
-  //     onPressed: () => _limparAnalise(filtro: filtro),
-  //   );
-  // }
+  Widget botaoLimparAnalise({required RemessaModel filtro}) {
+    return BotaoLimparAnalise(
+      ativo: filtro.protocolosComBoletos.isNotEmpty ||
+          filtro.arquivosInvalidos.isNotEmpty,
+      height: 100,
+      width: 100,
+      size: 20,
+      onPressed: () => _limparAnalise(filtro: filtro),
+    );
+  }
 
-  // void _limparAnalise({required RemessaModel filtro}) {
-  //   if (filtro.protocolosComBoletos.isNotEmpty ||
-  //       filtro.arquivosInvalidos.isNotEmpty) {
-  //     remessasController.limparAnalise(idRemessa: filtro.id);
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Limpesa da Analise",
-  //       message: "Dados limpos!",
-  //     ));
-  //   } else {
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Limpesa da Analise",
-  //       message: "Sem dados para limpar!",
-  //     ));
-  //   }
-  // }
+  void _limparAnalise({required RemessaModel filtro}) {
+    if (filtro.protocolosComBoletos.isNotEmpty ||
+        filtro.arquivosInvalidos.isNotEmpty) {
+      remessasController.limparAnalise(idRemessa: filtro.id);
+      designSystemController.message(MessageModel.info(
+        title: "Limpesa da Analise",
+        message: "Dados limpos!",
+      ));
+    } else {
+      designSystemController.message(MessageModel.info(
+        title: "Limpesa da Analise",
+        message: "Sem dados para limpar!",
+      ));
+    }
+  }
 
-  // Widget _iconButtonUpload() {
-  //   return BotaoUpload(
-  //     size: 20,
-  //     onPressed: _setUpload,
-  //   );
-  // }
+  Widget _iconButtonUpload() {
+    return BotaoUpload(
+      size: 20,
+      onPressed: _setUpload,
+    );
+  }
 
-  // void _setUpload() {
-  //   uploadRemessaController.setUploadRemessas();
-  // }
+  void _setUpload() {
+    uploadRemessaController.setUploadRemessas();
+  }
 
-  // Future<void> _downloadAnalise({required RemessaModel filtro}) async {
-  //   if (!filtro.isOk &&
-  //       filtro.protocolosSemBoletos.isNotEmpty &&
-  //       filtro.protocolosComBoletos.isNotEmpty) {
-  //     final boletos = filtro.protocolosSemBoletos;
+  Future<void> _downloadAnalise({required RemessaModel filtro}) async {
+    if (!filtro.isOk &&
+        filtro.protocolosSemBoletos.isNotEmpty &&
+        filtro.protocolosComBoletos.isNotEmpty) {
+      final boletos = filtro.protocolosSemBoletos;
 
-  //     const camposKeys = <String>[
-  //       "ID Cliente",
-  //       "Cliente",
-  //       "Documento",
-  //       "Email",
-  //       "Telefone Fixo",
-  //       "Telefone Movel",
-  //       "ID Contrato",
-  //       "Tipo",
-  //       "Data Habilitacao contrato",
-  //       "Número de Boleto",
-  //       "Forma de Cobrança",
-  //       "Data Vencimento Fatura",
-  //       "Valor Fatura",
-  //       "Data Emissao Fatura",
-  //       "Arquivo",
-  //       "Data Impressão Fatura",
-  //       "UF",
-  //       "Cidade",
-  //       "Bairro",
-  //       "Tipo Logradouro",
-  //       "Logradouro",
-  //       "Numero",
-  //       "CEP",
-  //       "Solicitante da Geração",
-  //       "ID Fatura",
-  //       "Referencia",
-  //     ];
+      const camposKeys = <String>[
+        "ID Cliente",
+        "Cliente",
+        "Documento",
+        "Email",
+        "Telefone Fixo",
+        "Telefone Movel",
+        "ID Contrato",
+        "Tipo",
+        "Data Habilitacao contrato",
+        "Número de Boleto",
+        "Forma de Cobrança",
+        "Data Vencimento Fatura",
+        "Valor Fatura",
+        "Data Emissao Fatura",
+        "Arquivo",
+        "Data Impressão Fatura",
+        "UF",
+        "Cidade",
+        "Bairro",
+        "Tipo Logradouro",
+        "Logradouro",
+        "Numero",
+        "CEP",
+        "Solicitante da Geração",
+        "ID Fatura",
+        "Referencia",
+      ];
 
-  //     var excel = Excel.createExcel();
+      var excel = Excel.createExcel();
 
-  //     Sheet sheetObject = excel[excel.getDefaultSheet()!];
-  //     CellStyle cellStyleTitulos = CellStyle(
-  //       horizontalAlign: HorizontalAlign.Center,
-  //       bold: true,
-  //     );
+      Sheet sheetObject = excel[excel.getDefaultSheet()!];
+      CellStyle cellStyleTitulos = CellStyle(
+        horizontalAlign: HorizontalAlign.Center,
+        bold: true,
+      );
 
-  //     sheetObject.merge(
-  //         CellIndex.indexByString("A1"), CellIndex.indexByString("X1"),
-  //         customValue:
-  //             "SISTEMA DE REGISTRO DE PROTOCOLO - PROTOCOLOS SEM ARQUIVOS DE BOLETO - ${filtro.nomeArquivo}");
+      sheetObject.merge(
+          CellIndex.indexByString("A1"), CellIndex.indexByString("X1"),
+          customValue:
+              "SISTEMA DE REGISTRO DE PROTOCOLO - PROTOCOLOS SEM ARQUIVOS DE BOLETO - ${filtro.nomeArquivo}");
 
-  //     var titulo = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0));
-  //     titulo.cellStyle = cellStyleTitulos;
+      var titulo = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0));
+      titulo.cellStyle = cellStyleTitulos;
 
-  //     var emissao = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: 24, rowIndex: 0));
-  //     emissao.value = "Data Emissão :";
-  //     emissao.cellStyle = cellStyleTitulos;
+      var emissao = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 24, rowIndex: 0));
+      emissao.value = "Data Emissão :";
+      emissao.cellStyle = cellStyleTitulos;
 
-  //     var dataEmissao = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: 25, rowIndex: 0));
-  //     dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data);
-  //     dataEmissao.cellStyle = cellStyleTitulos;
+      var dataEmissao = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: 25, rowIndex: 0));
+      dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data);
+      dataEmissao.cellStyle = cellStyleTitulos;
 
-  //     for (var coluna = 0; coluna < camposKeys.length; coluna++) {
-  //       var cell = sheetObject
-  //           .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
-  //       cell.value = camposKeys[coluna];
-  //       cell.cellStyle = cellStyleTitulos;
-  //     }
+      for (var coluna = 0; coluna < camposKeys.length; coluna++) {
+        var cell = sheetObject
+            .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
+        cell.value = camposKeys[coluna];
+        cell.cellStyle = cellStyleTitulos;
+      }
 
-  //     for (BoletoModel boleto in boletos) {
-  //       int indexBoleto = boletos.indexOf(boleto) + 2;
-  //       final listValores = boleto.toListXlsx();
-  //       int indexValor = 0;
-  //       for (dynamic valor in listValores) {
-  //         sheetObject
-  //             .cell(CellIndex.indexByColumnRow(
-  //                 columnIndex: indexValor, rowIndex: indexBoleto))
-  //             .value = valor;
-  //         indexValor++;
-  //       }
-  //     }
+      for (BoletoModel boleto in boletos) {
+        int indexBoleto = boletos.indexOf(boleto) + 2;
+        final listValores = boleto.toListXlsx();
+        int indexValor = 0;
+        for (dynamic valor in listValores) {
+          sheetObject
+              .cell(CellIndex.indexByColumnRow(
+                  columnIndex: indexValor, rowIndex: indexBoleto))
+              .value = valor;
+          indexValor++;
+        }
+      }
 
-  //     sheetObject.setColWidth(0, 10);
-  //     sheetObject.setColAutoFit(1);
-  //     sheetObject.setColWidth(2, 0);
-  //     sheetObject.setColWidth(3, 0);
-  //     sheetObject.setColWidth(4, 0);
-  //     sheetObject.setColWidth(5, 0);
-  //     sheetObject.setColAutoFit(6);
-  //     sheetObject.setColWidth(7, 0);
-  //     sheetObject.setColWidth(8, 0);
-  //     sheetObject.setColWidth(9, 0);
-  //     sheetObject.setColAutoFit(10);
-  //     sheetObject.setColWidth(11, 0);
-  //     sheetObject.setColWidth(12, 0);
-  //     sheetObject.setColWidth(13, 0);
-  //     sheetObject.setColWidth(14, 0);
-  //     for (var coluna = 15; coluna < camposKeys.length; coluna++) {
-  //       sheetObject.setColAutoFit(coluna);
-  //     }
-  //     sheetObject.setColWidth(17, 30);
-  //     sheetObject.setColWidth(18, 0);
-  //     sheetObject.setColWidth(22, 0);
-  //     sheetObject.setColWidth(24, 12);
+      sheetObject.setColWidth(0, 10);
+      sheetObject.setColAutoFit(1);
+      sheetObject.setColWidth(2, 0);
+      sheetObject.setColWidth(3, 0);
+      sheetObject.setColWidth(4, 0);
+      sheetObject.setColWidth(5, 0);
+      sheetObject.setColAutoFit(6);
+      sheetObject.setColWidth(7, 0);
+      sheetObject.setColWidth(8, 0);
+      sheetObject.setColWidth(9, 0);
+      sheetObject.setColAutoFit(10);
+      sheetObject.setColWidth(11, 0);
+      sheetObject.setColWidth(12, 0);
+      sheetObject.setColWidth(13, 0);
+      sheetObject.setColWidth(14, 0);
+      for (var coluna = 15; coluna < camposKeys.length; coluna++) {
+        sheetObject.setColAutoFit(coluna);
+      }
+      sheetObject.setColWidth(17, 30);
+      sheetObject.setColWidth(18, 0);
+      sheetObject.setColWidth(22, 0);
+      sheetObject.setColWidth(24, 12);
 
-  //     final planilha =
-  //         excel.save(fileName: "${filtro.nomeArquivo} - ERRO FILTRO.xlsx");
+      final planilha =
+          excel.save(fileName: "${filtro.nomeArquivo} - ERRO FILTRO.xlsx");
 
-  //     if (planilha != null) {
-  //       await remessasController.saveAndLaunchFile(
-  //           planilha as Uint8List,
-  //           "${filtro.nomeArquivo} - ERRO FILTRO.xlsx",
-  //           boletos[0].remessa.target!.nomeArquivo);
-  //     }
-  //   } else if (!filtro.isOk) {
-  //     designSystemController.message(MessageModel.error(
-  //       title: "Analise de Arquivos",
-  //       message: "Faça o upload dos arquivos em pdf para verificação!",
-  //     ));
-  //   } else {
-  //     designSystemController.message(MessageModel.info(
-  //       title: "Analise de Arquivos",
-  //       message: "Arquivos OK!",
-  //     ));
-  //   }
-  // }
+      if (planilha != null) {
+        await remessasController.saveAndLaunchFile(
+            planilha as Uint8List,
+            "${filtro.nomeArquivo} - ERRO FILTRO.xlsx",
+            boletos[0].remessa.target!.nomeArquivo);
+      }
+    } else if (!filtro.isOk) {
+      designSystemController.message(MessageModel.error(
+        title: "Analise de Arquivos",
+        message: "Faça o upload dos arquivos em pdf para verificação!",
+      ));
+    } else {
+      designSystemController.message(MessageModel.info(
+        title: "Analise de Arquivos",
+        message: "Arquivos OK!",
+      ));
+    }
+  }
 
-  // Future<void> _downloadXlsx({required RemessaModel filtro}) async {
-  //   final boletos = filtro.boletos;
-  //   const camposKeys = <String>[
-  //     "ID Cliente",
-  //     "Cliente",
-  //     "Documento",
-  //     "Email",
-  //     "Telefone Fixo",
-  //     "Telefone Movel",
-  //     "ID Contrato",
-  //     "Tipo",
-  //     "Data Habilitacao contrato",
-  //     "Número de Boleto",
-  //     "Forma de Cobrança",
-  //     "Data Vencimento Fatura",
-  //     "Valor Fatura",
-  //     "Data Emissao Fatura",
-  //     "Arquivo",
-  //     "Data Impressão Fatura",
-  //     "UF",
-  //     "Cidade",
-  //     "Bairro",
-  //     "Tipo Logradouro",
-  //     "Logradouro",
-  //     "Numero",
-  //     "CEP",
-  //     "Solicitante da Geração",
-  //     "ID Fatura",
-  //     "Referencia",
-  //     "Cód. De Barras",
-  //   ];
+  Future<void> _downloadXlsx({required RemessaModel filtro}) async {
+    final boletos = filtro.boletos;
+    const camposKeys = <String>[
+      "ID Cliente",
+      "Cliente",
+      "Documento",
+      "Email",
+      "Telefone Fixo",
+      "Telefone Movel",
+      "ID Contrato",
+      "Tipo",
+      "Data Habilitacao contrato",
+      "Número de Boleto",
+      "Forma de Cobrança",
+      "Data Vencimento Fatura",
+      "Valor Fatura",
+      "Data Emissao Fatura",
+      "Arquivo",
+      "Data Impressão Fatura",
+      "UF",
+      "Cidade",
+      "Bairro",
+      "Tipo Logradouro",
+      "Logradouro",
+      "Numero",
+      "CEP",
+      "Solicitante da Geração",
+      "ID Fatura",
+      "Referencia",
+      "Cód. De Barras",
+    ];
 
-  //   var excel = Excel.createExcel();
+    var excel = Excel.createExcel();
 
-  //   Sheet sheetObject = excel[excel.getDefaultSheet()!];
-  //   CellStyle cellStyleTitulos = CellStyle(
-  //     horizontalAlign: HorizontalAlign.Center,
-  //     bold: true,
-  //   );
-  //   sheetObject.merge(
-  //       CellIndex.indexByString("A1"), CellIndex.indexByString("Y1"),
-  //       customValue:
-  //           "SISTEMA DE REGISTRO DE PROTOCOLO - ${filtro.nomeArquivo}");
+    Sheet sheetObject = excel[excel.getDefaultSheet()!];
+    CellStyle cellStyleTitulos = CellStyle(
+      horizontalAlign: HorizontalAlign.Center,
+      bold: true,
+    );
+    sheetObject.merge(
+        CellIndex.indexByString("A1"), CellIndex.indexByString("Y1"),
+        customValue:
+            "SISTEMA DE REGISTRO DE PROTOCOLO - ${filtro.nomeArquivo}");
 
-  //   var titulo = sheetObject
-  //       .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0));
-  //   titulo.cellStyle = cellStyleTitulos;
+    var titulo = sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 0, rowIndex: 0));
+    titulo.cellStyle = cellStyleTitulos;
 
-  //   var emissao = sheetObject
-  //       .cell(CellIndex.indexByColumnRow(columnIndex: 25, rowIndex: 0));
-  //   emissao.value = "Data Emissão :";
-  //   emissao.cellStyle = cellStyleTitulos;
+    var emissao = sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 25, rowIndex: 0));
+    emissao.value = "Data Emissão :";
+    emissao.cellStyle = cellStyleTitulos;
 
-  //   var dataEmissao = sheetObject
-  //       .cell(CellIndex.indexByColumnRow(columnIndex: 26, rowIndex: 0));
-  //   dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data);
-  //   dataEmissao.cellStyle = cellStyleTitulos;
-  //   for (var coluna = 0; coluna < camposKeys.length; coluna++) {
-  //     var cell = sheetObject
-  //         .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
-  //     cell.value = camposKeys[coluna];
-  //     cell.cellStyle = cellStyleTitulos;
-  //   }
-  //   for (BoletoModel boleto in boletos) {
-  //     int indexBoleto = boletos.indexOf(boleto) + 2;
-  //     final listValores = boleto.toListXlsx();
-  //     int indexValor = 0;
-  //     for (dynamic valor in listValores) {
-  //       // print(valor);
-  //       sheetObject
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: indexValor, rowIndex: indexBoleto))
-  //           .value = valor;
-  //       indexValor++;
-  //     }
-  //     sheetObject
-  //         .cell(CellIndex.indexByColumnRow(
-  //             columnIndex: indexValor, rowIndex: indexBoleto))
-  //         .value = boleto.codigoDeBarras;
-  //   }
+    var dataEmissao = sheetObject
+        .cell(CellIndex.indexByColumnRow(columnIndex: 26, rowIndex: 0));
+    dataEmissao.value = dataFormatoDDMMYYYY.format(filtro.data);
+    dataEmissao.cellStyle = cellStyleTitulos;
+    for (var coluna = 0; coluna < camposKeys.length; coluna++) {
+      var cell = sheetObject
+          .cell(CellIndex.indexByColumnRow(columnIndex: coluna, rowIndex: 1));
+      cell.value = camposKeys[coluna];
+      cell.cellStyle = cellStyleTitulos;
+    }
+    for (BoletoModel boleto in boletos) {
+      int indexBoleto = boletos.indexOf(boleto) + 2;
+      final listValores = boleto.toListXlsx();
+      int indexValor = 0;
+      for (dynamic valor in listValores) {
+        // print(valor);
+        sheetObject
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: indexValor, rowIndex: indexBoleto))
+            .value = valor;
+        indexValor++;
+      }
+      sheetObject
+          .cell(CellIndex.indexByColumnRow(
+              columnIndex: indexValor, rowIndex: indexBoleto))
+          .value = boleto.codigoDeBarras;
+    }
 
-  //   sheetObject.setColWidth(0, 10);
-  //   sheetObject.setColAutoFit(1);
-  //   sheetObject.setColWidth(2, 0);
-  //   sheetObject.setColWidth(3, 0);
-  //   sheetObject.setColWidth(4, 0);
-  //   sheetObject.setColWidth(5, 0);
-  //   sheetObject.setColAutoFit(6);
-  //   sheetObject.setColAutoFit(7);
-  //   sheetObject.setColAutoFit(8);
-  //   sheetObject.setColWidth(9, 0);
-  //   sheetObject.setColWidth(10, 0);
-  //   sheetObject.setColAutoFit(11);
-  //   sheetObject.setColWidth(12, 0);
-  //   sheetObject.setColWidth(13, 0);
-  //   sheetObject.setColWidth(14, 0);
-  //   sheetObject.setColWidth(15, 0);
-  //   for (var coluna = 16; coluna < camposKeys.length; coluna++) {
-  //     sheetObject.setColAutoFit(coluna);
-  //   }
-  //   sheetObject.setColWidth(17, 30);
-  //   sheetObject.setColWidth(18, 30);
-  //   sheetObject.setColWidth(19, 0);
-  //   sheetObject.setColWidth(23, 0);
-  //   sheetObject.setColWidth(25, 25);
-  //   sheetObject.setColWidth(26, 25);
+    sheetObject.setColWidth(0, 10);
+    sheetObject.setColAutoFit(1);
+    sheetObject.setColWidth(2, 0);
+    sheetObject.setColWidth(3, 0);
+    sheetObject.setColWidth(4, 0);
+    sheetObject.setColWidth(5, 0);
+    sheetObject.setColAutoFit(6);
+    sheetObject.setColAutoFit(7);
+    sheetObject.setColAutoFit(8);
+    sheetObject.setColWidth(9, 0);
+    sheetObject.setColWidth(10, 0);
+    sheetObject.setColAutoFit(11);
+    sheetObject.setColWidth(12, 0);
+    sheetObject.setColWidth(13, 0);
+    sheetObject.setColWidth(14, 0);
+    sheetObject.setColWidth(15, 0);
+    for (var coluna = 16; coluna < camposKeys.length; coluna++) {
+      sheetObject.setColAutoFit(coluna);
+    }
+    sheetObject.setColWidth(17, 30);
+    sheetObject.setColWidth(18, 30);
+    sheetObject.setColWidth(19, 0);
+    sheetObject.setColWidth(23, 0);
+    sheetObject.setColWidth(25, 25);
+    sheetObject.setColWidth(26, 25);
 
-  //   final planilha =
-  //       excel.save(fileName: "${filtro.nomeArquivo} - FILTRO.xlsx");
+    final planilha =
+        excel.save(fileName: "${filtro.nomeArquivo} - FILTRO.xlsx");
 
-  //   if (planilha != null) {
-  //     await remessasController.saveAndLaunchFile(
-  //         planilha as Uint8List,
-  //         "${filtro.nomeArquivo} - FILTRO.xlsx",
-  //         boletos[0].remessa.target!.nomeArquivo);
-  //   }
-  // }
+    if (planilha != null) {
+      await remessasController.saveAndLaunchFile(
+          planilha as Uint8List,
+          "${filtro.nomeArquivo} - FILTRO.xlsx",
+          boletos[0].remessa.target!.nomeArquivo);
+    }
+  }
 
-  // Future<void> _downloadProtocolos(
-  //     {required List<BoletoModel> protocolos}) async {
-  //   final List<BoletoModel> boletos = [];
+  Future<void> _downloadProtocolos(
+      {required List<BoletoModel> protocolos}) async {
+    final List<BoletoModel> boletos = [];
 
-  //   for (BoletoModel value in protocolos) {
-  //     boletos.add(value);
-  //   }
+    for (BoletoModel value in protocolos) {
+      boletos.add(value);
+    }
 
-  //   const tamanhoDownload = 1000;
-  //   final quantidadeDeboletos = boletos.length;
-  //   final quantidadeDeArquivos =
-  //       ((quantidadeDeboletos / tamanhoDownload) + 0.4999).round();
-  //   var boletosPart = boletos;
+    const tamanhoDownload = 1000;
+    final quantidadeDeboletos = boletos.length;
+    final quantidadeDeArquivos =
+        ((quantidadeDeboletos / tamanhoDownload) + 0.4999).round();
+    var boletosPart = boletos;
 
-  //   for (int i = 0; i < quantidadeDeArquivos; i++) {
-  //     final boletosTake = boletosPart.take(tamanhoDownload);
-  //     await _generatePdf2(
-  //         boletos: boletosTake.toList(),
-  //         part: "${i + 1} de $quantidadeDeArquivos");
+    for (int i = 0; i < quantidadeDeArquivos; i++) {
+      final boletosTake = boletosPart.take(tamanhoDownload);
+      await _generatePdf2(
+          boletos: boletosTake.toList(),
+          part: "${i + 1} de $quantidadeDeArquivos");
 
-  //     if (boletosPart.length > tamanhoDownload) {
-  //       boletosPart.removeRange(0, tamanhoDownload);
-  //     }
-  //   }
-  // }
+      if (boletosPart.length > tamanhoDownload) {
+        boletosPart.removeRange(0, tamanhoDownload);
+      }
+    }
+  }
 
   Future<pw.Widget> _protocolosListPrintWidget({
     required String nomeRemessa,
@@ -779,76 +779,76 @@ class DesignSystemController extends GetxController
     );
   }
 
-  // Future<void> _generatePdf2(
-  //     {required List<BoletoModel> boletos, required String part}) async {
-  //   final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
+  Future<void> _generatePdf2(
+      {required List<BoletoModel> boletos, required String part}) async {
+    final pdf = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
 
-  //   final netImage = pw.MemoryImage(
-  //     remessasController.imagemModelo!,
-  //   );
+    final netImage = pw.MemoryImage(
+      remessasController.imagemModelo!,
+    );
 
-  //   final testeFuturo = <Future<pw.Widget>>[
-  //     _protocolosListPrintWidget(
-  //       nomeRemessa: boletos[0].remessa.target!.nomeArquivo,
-  //       netImage: netImage,
-  //       boletos: boletos,
-  //     ),
-  //     _listaConferenciaPrintWidget(boletos: boletos)
-  //   ];
+    final testeFuturo = <Future<pw.Widget>>[
+      _protocolosListPrintWidget(
+        nomeRemessa: boletos[0].remessa.target!.nomeArquivo,
+        netImage: netImage,
+        boletos: boletos,
+      ),
+      _listaConferenciaPrintWidget(boletos: boletos)
+    ];
 
-  //   final Iterable<Future<pw.Widget>> processarWidgetFuturo =
-  //       testeFuturo.map((arquivo) => arquivo);
+    final Iterable<Future<pw.Widget>> processarWidgetFuturo =
+        testeFuturo.map((arquivo) => arquivo);
 
-  //   final Future<Iterable<pw.Widget>> waitedWidget =
-  //       Future.wait(processarWidgetFuturo);
+    final Future<Iterable<pw.Widget>> waitedWidget =
+        Future.wait(processarWidgetFuturo);
 
-  //   final widgetPdfs = await waitedWidget.then((value) => value.toList());
+    final widgetPdfs = await waitedWidget.then((value) => value.toList());
 
-  //   pdf.addPage(
-  //     pw.MultiPage(
-  //       maxPages: 260,
-  //       pageFormat: PdfPageFormat.a4.copyWith(
-  //         marginBottom: 10,
-  //         marginLeft: 20,
-  //         marginRight: 20,
-  //         marginTop: 20,
-  //       ),
-  //       build: (context) {
-  //         return [
-  //           pw.SizedBox(height: 10),
-  //           widgetPdfs[0],
-  //           pw.SizedBox(height: 10),
-  //         ];
-  //       },
-  //     ),
-  //   );
+    pdf.addPage(
+      pw.MultiPage(
+        maxPages: 260,
+        pageFormat: PdfPageFormat.a4.copyWith(
+          marginBottom: 10,
+          marginLeft: 20,
+          marginRight: 20,
+          marginTop: 20,
+        ),
+        build: (context) {
+          return [
+            pw.SizedBox(height: 10),
+            widgetPdfs[0],
+            pw.SizedBox(height: 10),
+          ];
+        },
+      ),
+    );
 
-  //   pdf.addPage(
-  //     pw.MultiPage(
-  //       maxPages: 20,
-  //       pageFormat: PdfPageFormat.a4.copyWith(
-  //         marginBottom: 10,
-  //         marginLeft: 20,
-  //         marginRight: 20,
-  //         marginTop: 20,
-  //       ),
-  //       build: (context) => [
-  //         pw.SizedBox(height: 10),
-  //         pw.Text(
-  //           "Lista para conferencia - ${boletos[0].remessa.target!.nomeArquivo} - $part",
-  //           style: const pw.TextStyle(fontSize: 10),
-  //         ),
-  //         pw.SizedBox(height: 10),
-  //         widgetPdfs[1],
-  //       ],
-  //     ),
-  //   );
+    pdf.addPage(
+      pw.MultiPage(
+        maxPages: 20,
+        pageFormat: PdfPageFormat.a4.copyWith(
+          marginBottom: 10,
+          marginLeft: 20,
+          marginRight: 20,
+          marginTop: 20,
+        ),
+        build: (context) => [
+          pw.SizedBox(height: 10),
+          pw.Text(
+            "Lista para conferencia - ${boletos[0].remessa.target!.nomeArquivo} - $part",
+            style: const pw.TextStyle(fontSize: 10),
+          ),
+          pw.SizedBox(height: 10),
+          widgetPdfs[1],
+        ],
+      ),
+    );
 
-  //   final protocolosPdf = await pdf.save();
+    final protocolosPdf = await pdf.save();
 
-  //   await remessasController.saveAndLaunchFile(
-  //       protocolosPdf,
-  //       "$part - ${boletos[0].remessa.target!.nomeArquivo} - Protocolos.pdf",
-  //       boletos[0].remessa.target!.nomeArquivo);
-  // }
+    await remessasController.saveAndLaunchFile(
+        protocolosPdf,
+        "$part - ${boletos[0].remessa.target!.nomeArquivo} - Protocolos.pdf",
+        boletos[0].remessa.target!.nomeArquivo);
+  }
 }

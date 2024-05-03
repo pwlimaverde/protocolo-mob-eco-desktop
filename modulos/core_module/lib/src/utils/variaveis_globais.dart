@@ -7,8 +7,8 @@ final Box<RemessaModel> dataBaseRemessa = Get.find();
 final Box<BoletoModel> dataBaseBoleto = Get.find();
 final Box<ImagemModeloModel> dataBaseImagem = Get.find();
 final DesignSystemController designSystemController = Get.find();
-// final UploadRemessaController uploadRemessaController = Get.find();
-// final RemessasController remessasController = Get.find();
+final UploadRemessaController uploadRemessaController = Get.find();
+final RemessasController remessasController = Get.find();
 
 const double menuWidth = 200;
 const double hederHeight = 60;

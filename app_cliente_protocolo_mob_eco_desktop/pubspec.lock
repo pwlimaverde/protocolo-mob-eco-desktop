@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   core_module:
     dependency: transitive
     description:
@@ -492,6 +500,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  remessas_module:
+    dependency: transitive
+    description:
+      path: "../modulos/remessas_module"
+      relative: true
+    source: path
+    version: "0.0.1"
   return_success_or_error:
     dependency: transitive
     description:
@@ -544,6 +559,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "3979f0b1c5a97422cadae52d476c21fa3e0fb671ef51de6cae1d646d8b99fe1f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.54"
+  syncfusion_flutter_pdf:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_pdf
+      sha256: cebcafc60d52d52e0789c18b6332c2bd378f0a6cca006fe0373293bcc6a66e6d
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.54"
   term_glyph:
     dependency: transitive
     description:
@@ -572,6 +603,13 @@ packages:
     dependency: transitive
     description:
       path: "../packages/upload_arquivo_html_package"
+      relative: true
+    source: path
+    version: "0.0.1"
+  upload_remessa_module:
+    dependency: transitive
+    description:
+      path: "../modulos/upload_remessa_module"
       relative: true
     source: path
     version: "0.0.1"
