@@ -13,6 +13,7 @@ class ProcessamentoDadosArquivoHtmlDatasource
         List<Map<String, dynamic>> remessasProcessadasError = [];
         for (Map<String, dynamic> mapRemessa in parameters.listaMapBruta) {
           final String nomeArquivo = mapRemessa["arquivo"]["nome do arquivo"];
+
           final List<Map<String, String>> listaBoletos =
               mapRemessa["arquivo"]["boletos"];
 
@@ -20,6 +21,7 @@ class ProcessamentoDadosArquivoHtmlDatasource
               mapRemessa["arquivo"]["ID Clientes"];
 
           final DateTime data = mapRemessa["arquivo"]["data da remessa"];
+
           final String tipo = mapRemessa["arquivo"]["tipo do arquivo"];
 
           if (listaBoletos.isNotEmpty) {
