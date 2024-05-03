@@ -14,9 +14,9 @@ class AnimacaoInicial extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   primarySwatch: Colors.red,
-      // ),
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
       home: Container(
         color: Colors.grey,
         child: const Center(
@@ -42,9 +42,9 @@ class MyApp extends StatelessWidget {
         ...RemessasModule().routers,
         ...HomeModule().routers,
       ],
-      // theme: ThemeData(
-      //   primarySwatch: Colors.red,
-      // ),
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
     );
   }
 }

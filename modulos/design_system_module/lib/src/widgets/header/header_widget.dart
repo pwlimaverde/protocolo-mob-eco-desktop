@@ -15,6 +15,7 @@ class HeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.red,
       centerTitle: true,
       title: Center(
         child: Column(

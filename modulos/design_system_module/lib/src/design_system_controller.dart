@@ -83,7 +83,7 @@ class DesignSystemController extends GetxController
                   : [],
         ),
       ),
-      backgroundColor: Get.theme.primaryColor,
+      backgroundColor: Colors.red[200],
       body: Column(
         children: <Widget>[
           Obx(() {
@@ -147,7 +147,7 @@ class DesignSystemController extends GetxController
       onPressed: () async {
         setLoading(value: 0.001);
         await Future.delayed(const Duration(milliseconds: 500));
-        // await _downloadProtocolos(protocolos: filtro);
+        await _downloadProtocolos(protocolos: filtro);
         setLoading(value: 1);
         await Future.delayed(const Duration(seconds: 1));
         setLoading(value: 0.0);
@@ -162,7 +162,7 @@ class DesignSystemController extends GetxController
       onPressed: () async {
         setLoading(value: 0.001);
         await Future.delayed(const Duration(milliseconds: 500));
-        // await _downloadXlsx(filtro: filtro);
+        await _downloadXlsx(filtro: filtro);
         setLoading(value: 1);
         await Future.delayed(const Duration(seconds: 1));
         setLoading(value: 0.0);
