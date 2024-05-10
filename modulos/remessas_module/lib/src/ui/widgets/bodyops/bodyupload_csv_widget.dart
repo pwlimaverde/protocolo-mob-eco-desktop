@@ -94,7 +94,9 @@ _todasRemessasList() {
                 child: Card(
                   color: remessaModel.tipo == "RE"
                       ? const Color.fromARGB(255, 247, 196, 130)
-                      : Colors.white,
+                      : remessaModel.nomeArquivo.contains("Boleto")
+                          ? Colors.grey[300]
+                          : Colors.white,
                   elevation: 0.5,
                   child: SizedBox(
                     width: 900,

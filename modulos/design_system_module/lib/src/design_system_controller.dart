@@ -1,15 +1,10 @@
-import 'dart:convert';
-import 'package:core_module/src/services/service/database/db/objectbox.g.dart';
-
 import 'package:dependencies_module/dependencies_module.dart';
 import 'package:design_system_module/src/mixins/ui/loading/loading_mixin.dart';
-import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_excel/excel.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 
 import 'mixins/ui/loader/loader_mixin.dart';
 import 'mixins/ui/messages/messages_mixin.dart';
