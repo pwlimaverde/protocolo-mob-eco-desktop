@@ -23,7 +23,7 @@ class HomeModule extends Module {
                     message:
                         'Erro ao carregar a licença! Contate o Desenvolvedor...',
                   ));
-                  return Center(
+                  return const Center(
                     child: SizedBox(
                       width: 350,
                       height: 350,
@@ -32,7 +32,7 @@ class HomeModule extends Module {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
+                          children: [
                             Icon(
                               Icons.warning_rounded,
                               color: Colors.white,

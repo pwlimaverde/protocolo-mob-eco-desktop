@@ -1,16 +1,18 @@
 name: app_cliente_protocolo_mob_eco_desktop
 description: Sistema para geração de protocolos MOB.
 publish_to: 'none' 
-version: 0.0.2
+version: 0.0.3
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
+  sdk: ">=3.2.4 <4.0.0"
+  flutter: ">=3.16.7"
 
 dependencies:
   flutter:
     sdk: flutter
   dependencies_module:
     path: ../modulos/dependencies_module
+  desktop_window: ^0.4.0
 
 dev_dependencies:
   flutter_test:

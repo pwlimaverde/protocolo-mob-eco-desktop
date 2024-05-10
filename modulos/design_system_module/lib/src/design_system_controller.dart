@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:core_module/src/services/service/database/db/objectbox.g.dart';
-
 import 'package:dependencies_module/dependencies_module.dart';
 import 'package:design_system_module/src/mixins/ui/loading/loading_mixin.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_excel/excel.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 
 import 'mixins/ui/loader/loader_mixin.dart';
 import 'mixins/ui/messages/messages_mixin.dart';
@@ -83,7 +79,7 @@ class DesignSystemController extends GetxController
                   : [],
         ),
       ),
-      backgroundColor: Get.theme.primaryColor,
+      backgroundColor: Colors.red[200],
       body: Column(
         children: <Widget>[
           Obx(() {
@@ -173,8 +169,8 @@ class DesignSystemController extends GetxController
   Widget botaoAnalisePdf({required RemessaModel filtro}) {
     return BotaoAnalisePdf(
       ativo: filtro.isOk,
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
       size: 20,
       onPressed: () async {
         setLoading(value: 0.001);
@@ -203,8 +199,8 @@ class DesignSystemController extends GetxController
       alerta: filtro.protocolosSemBoletos.isNotEmpty &&
           filtro.protocolosComBoletos.isNotEmpty,
       ativo: filtro.isOk,
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
       size: 20,
       onPressed: () async {
         setLoading(value: 0.001);
@@ -221,8 +217,8 @@ class DesignSystemController extends GetxController
     return BotaoLimparAnalise(
       ativo: filtro.protocolosComBoletos.isNotEmpty ||
           filtro.arquivosInvalidos.isNotEmpty,
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
       size: 20,
       onPressed: () => _limparAnalise(filtro: filtro),
     );
@@ -778,16 +774,6 @@ class DesignSystemController extends GetxController
           }),
     );
   }
-
-  // // _pdf2({
-  // //   required RemessaModel filtro,
-  // //   required String titulo,
-  // // }) {
-  // //   return PdfPreview(
-  // //     build: (format) =>
-  // //         _generatePdf2(format: format, title: titulo, filtro: filtro),
-  // //   );
-  // // }
 
   Future<void> _generatePdf2(
       {required List<BoletoModel> boletos, required String part}) async {

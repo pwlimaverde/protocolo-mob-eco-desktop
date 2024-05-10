@@ -2,11 +2,10 @@ name: design_system_module
 description: Modulo responsável pelo gerenciamento do designer.
 publish_to: 'none'
 version: 0.0.3
-homepage:
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
-  flutter: ">=3.3.8"
+  sdk: ">=3.2.4 <4.0.0"
+  flutter: ">=3.16.7"
 
 dependencies:
   flutter:

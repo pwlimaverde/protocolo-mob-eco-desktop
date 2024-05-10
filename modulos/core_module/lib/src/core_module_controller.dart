@@ -33,9 +33,8 @@ class CoreModuleController extends GetxController {
   bool? get licenca => _licenca.value;
 
   bool get isCarregado {
-    return _sufixo.value != null &&
-            _licenca.value != null &&
-            remessasController.imagemModelo != null
+    return _sufixo.value != null && _licenca.value != null
+        // remessasController.imagemModelo != null
         ? true
         : false;
   }
@@ -59,7 +58,9 @@ class CoreModuleController extends GetxController {
   final pageAtual = 0.obs;
 
   //Controller de Query
-  final _size = Get.size.obs;
+
+  final _size =
+      Get.context != null ? Get.context!.size!.obs : const Size(1080, 720).obs;
   double get size => _size.value.width;
   double get sizeW =>
       showMenu ? _size.value.width : _size.value.width - menuWidth;
