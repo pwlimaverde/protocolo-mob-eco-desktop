@@ -94,10 +94,12 @@ _todasRemessasList() {
                 child: Card(
                   color: remessaModel.tipo == "RE"
                       ? const Color.fromARGB(255, 247, 196, 130)
-                      : Colors.white,
+                      : remessaModel.nomeArquivo.contains("Boleto")
+                          ? Colors.grey[300]
+                          : Colors.white,
                   elevation: 0.5,
                   child: SizedBox(
-                    width: 700,
+                    width: 900,
                     child: ListTile(
                       title: remessaModel.tipo == "RE"
                           ? Text("RENOVAÇÃO - $nomeRemessa")
@@ -135,7 +137,7 @@ _todasRemessasList() {
                         ],
                       ),
                       trailing: SizedBox(
-                        width: 310,
+                        width: 300,
                         height: 100,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -145,25 +147,25 @@ _todasRemessasList() {
                               filtro: remessaModel.boletos,
                             ),
                             const SizedBox(
-                              width: 15,
+                              width: 10,
                             ),
                             designSystemController.botaoDownloadXlsx(
                               filtro: remessaModel,
                             ),
                             const SizedBox(
-                              width: 15,
+                              width: 10,
                             ),
                             designSystemController.botaoAnalisePdf(
                               filtro: remessaModel,
                             ),
                             const SizedBox(
-                              width: 15,
+                              width: 10,
                             ),
                             designSystemController.botaoDownloadRelatorio(
                               filtro: remessaModel,
                             ),
                             const SizedBox(
-                              width: 15,
+                              width: 10,
                             ),
                             designSystemController.botaoLimparAnalise(
                               filtro: remessaModel,

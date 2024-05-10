@@ -2,11 +2,10 @@ name: core_module
 description: Modulo responsável pelo gerenciamento geral da aplicação.
 publish_to: 'none'
 version: 0.0.1
-homepage:
 
 environment:
-  sdk: '>=2.18.4 <3.0.0'
-  flutter: ">=3.3.8"
+  sdk: ">=3.2.4 <4.0.0"
+  flutter: ">=3.16.7"
 
 dependencies:
   flutter:

@@ -35,9 +35,15 @@ class MapeamentoDadosArquivoHtmlDatasource
     required Map<String, Uint8List> map,
   }) {
     if (map.keys.first.contains(".csv")) {
-      return _processamentoCsv(
-        map: map,
-      );
+      if (map.keys.first.contains("Carnê")) {
+        return _processamentoCsv(
+          map: map,
+        );
+      } else {
+        return _processamentoCsvNovo(
+          map: map,
+        );
+      }
     } else if (map.keys.first.contains(".xlsx")) {
       return _processamentoXlsx(
         map: map,
@@ -122,7 +128,8 @@ class MapeamentoDadosArquivoHtmlDatasource
       listCsv.addAll(
           const CsvToListConverter(fieldDelimiter: ";").convert(decoderByte));
 
-      mapCsv.addAll({"nome do arquivo": map.keys.first.split(".csv")[0]});
+      mapCsv.addAll(
+          {"nome do arquivo": "Carnê - ${map.keys.first.split(".csv")[0]}"});
       final DateTime dataProcessada = DateTime.parse(
         "${listCsv[0].last.substring(6, 10)}-${listCsv[0].last.substring(3, 5)}-${listCsv[0].last.substring(0, 2)}",
       );
@@ -160,6 +167,81 @@ class MapeamentoDadosArquivoHtmlDatasource
         }
       }
       mapCsv.addAll({"boletos": mapBoletos});
+      mapCsv.addAll({"ID Clientes": idsClienteList});
+
+      return mapCsv;
+    } catch (e) {
+      Map<String, dynamic> mapCatch = {
+        "nome do arquivo": map.keys.first.split(".")[0],
+        "data da remessa": DateTime.now(),
+        "boletos": <Map<String, String>>[],
+        "ID Clientes": <Map<String, String>>[],
+      };
+      return mapCatch;
+    }
+  }
+
+  Map<String, dynamic> _processamentoCsvNovo({
+    required Map<String, Uint8List> map,
+  }) {
+    try {
+      final decoderByte = convert.utf8.decode(map.values.first);
+      List<List<dynamic>> listCsv = [];
+      List<List<dynamic>> listaDados = [];
+      Map<String, dynamic> mapCsv = {};
+      List<Map<String, String>> mapBoletos = [];
+      List<int> idsClienteList = [];
+
+      listCsv.addAll(
+          const CsvToListConverter(fieldDelimiter: ";").convert(decoderByte));
+
+      mapCsv.addAll(
+          {"nome do arquivo": "Boleto - ${map.keys.first.split(".csv")[0]}"});
+
+      final DateTime dataProcessada = DateTime.now();
+      mapCsv.addAll({"data da remessa": dataProcessada});
+      mapCsv.addAll({"tipo do arquivo": "csv"});
+
+      listaDados.addAll(listCsv);
+      listaDados.removeRange(0, 1);
+
+      if (listaDados.isNotEmpty) {
+        List<dynamic> cabecario = listCsv[0];
+
+        for (List<dynamic> lista in listaDados) {
+          Map<String, String> boletoModelJason = {};
+          int index = 0;
+          for (dynamic item in lista) {
+            boletoModelJason
+                .addAll({"${cabecario[index]}": item != "" ? "$item" : "."});
+            index++;
+          }
+          final key1 = boletoModelJason.keys.first;
+
+          final value1 =
+              int.tryParse(boletoModelJason['ID_contrato_AIR'].toString());
+
+          if (key1 == 'ID_contrato_AIR' && value1 != null && value1 > 0) {
+            final boletoDuplicado = mapBoletos
+                    .where((element) =>
+                        element['ID_contrato_AIR'] ==
+                        boletoModelJason['ID_contrato_AIR'])
+                    .length ==
+                1;
+
+            if (boletoDuplicado) {
+              idsClienteList
+                  .add(int.parse(boletoModelJason['ID_contrato_AIR']!));
+            } else {
+              idsClienteList
+                  .add(int.parse(boletoModelJason['ID_contrato_AIR']!));
+              mapBoletos.add(boletoModelJason);
+            }
+          }
+        }
+      }
+      mapCsv.addAll({"boletos": mapBoletos});
+
       mapCsv.addAll({"ID Clientes": idsClienteList});
 
       return mapCsv;
