@@ -1,7 +1,11 @@
 import 'package:dependencies_module/dependencies_module.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DesktopWindow.setFullScreen(true);
+  await DesktopWindow.setMinWindowSize(const Size(850, 650));
   runApp(const AnimacaoInicial());
   await initServices();
   runApp(const MyApp());

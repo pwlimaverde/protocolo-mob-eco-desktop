@@ -3,6 +3,7 @@ import 'package:core_module/src/services/service/database/db/objectbox.g.dart';
 
 import 'package:dependencies_module/dependencies_module.dart';
 import 'package:design_system_module/src/mixins/ui/loading/loading_mixin.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_excel/excel.dart';
@@ -173,8 +174,8 @@ class DesignSystemController extends GetxController
   Widget botaoAnalisePdf({required RemessaModel filtro}) {
     return BotaoAnalisePdf(
       ativo: filtro.isOk,
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
       size: 20,
       onPressed: () async {
         setLoading(value: 0.001);
@@ -203,8 +204,8 @@ class DesignSystemController extends GetxController
       alerta: filtro.protocolosSemBoletos.isNotEmpty &&
           filtro.protocolosComBoletos.isNotEmpty,
       ativo: filtro.isOk,
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
       size: 20,
       onPressed: () async {
         setLoading(value: 0.001);
@@ -221,8 +222,8 @@ class DesignSystemController extends GetxController
     return BotaoLimparAnalise(
       ativo: filtro.protocolosComBoletos.isNotEmpty ||
           filtro.arquivosInvalidos.isNotEmpty,
-      height: 100,
-      width: 100,
+      height: 50,
+      width: 50,
       size: 20,
       onPressed: () => _limparAnalise(filtro: filtro),
     );

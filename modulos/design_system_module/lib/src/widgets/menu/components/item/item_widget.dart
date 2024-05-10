@@ -20,6 +20,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      selectedColor: Colors.red,
       selected: page == indice,
       leading: icon,
       title: Text(title),

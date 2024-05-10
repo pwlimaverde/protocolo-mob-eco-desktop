@@ -135,7 +135,7 @@ _todasRemessasList() {
                         ],
                       ),
                       trailing: SizedBox(
-                        width: 500,
+                        width: 300,
                         height: 100,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
