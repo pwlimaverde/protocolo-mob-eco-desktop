@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SistemaProtocoloMobEco"
-#define MyAppVersion "0.0.1"
+#define MyAppVersion "0.0.3"
 #define MyAppPublisher "Pwlimaverde"
 #define MyAppURL "https://github.com/pwlimaverde"
 #define MyAppExeName "app_cliente_protocolo_mob_eco_desktop.exe"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\installers
-OutputBaseFilename=protocolo_mob_eco_desktop
+OutputBaseFilename=protocolo_mob_eco_desktop_0.0.3
 SetupIconFile=C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\windows\runner\resources\app_icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -36,13 +36,14 @@ Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\objectbox.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\objectbox_flutter_libs_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\pdfium.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\printing_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\runner\Release\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\flutter_windows.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\desktop_window_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\objectbox.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\objectbox_flutter_libs_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\pdfium.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\printing_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\build\windows\x64\runner\Release\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
