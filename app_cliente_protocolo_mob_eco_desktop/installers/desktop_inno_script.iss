@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SistemaProtocoloMobEco"
-#define MyAppVersion "0.0.3"
+#define MyAppVersion "0.0.4"
 #define MyAppPublisher "Pwlimaverde"
 #define MyAppURL "https://github.com/pwlimaverde"
 #define MyAppExeName "app_cliente_protocolo_mob_eco_desktop.exe"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\installers
-OutputBaseFilename=protocolo_mob_eco_desktop_0.0.3
+OutputBaseFilename=protocolo_mob_eco_desktop_0.0.4
 SetupIconFile=C:\PROJETOS\FLUTTER\APPS\protocolo_mob_eco_desktop\app_cliente_protocolo_mob_eco_desktop\windows\runner\resources\app_icon.ico
 Compression=lzma
 SolidCompression=yes
