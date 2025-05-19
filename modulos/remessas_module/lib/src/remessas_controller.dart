@@ -80,7 +80,9 @@ class RemessasController extends GetxController
     );
     if (modelo.status == StatusResult.success) {
       final image = modelo.result as ImagemModeloModel;
+
       _imagemModelo(image.arquivo);
+
     }
   }
 

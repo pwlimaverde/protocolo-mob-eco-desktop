@@ -17,9 +17,9 @@ class CarregarImagemModeloDatabaseDatasource
           await NetworkAssetBundle(Uri.parse(linkModelo)).load("");
 
       final Uint8List bytes = imageData.buffer.asUint8List();
-
+      
       if (bytes.isNotEmpty) {
-        final image = dataBaseImagem.get(1) as ImagemModeloModel;
+        final image = dataBaseImagem.get(1)??ImagemModeloModel(bytes);
         image.arquivo = bytes;
         dataBaseImagem.put(image);
         return image;
